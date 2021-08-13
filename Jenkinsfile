@@ -1,8 +1,8 @@
 node("master") {
     stage("Stage 1") {
         parallel(
-            sh "echo linter"
-            sh "echo test"
+            "linter": {sh "echo linter"},
+            "test": {sh "echo test"}
         )
     }
 
