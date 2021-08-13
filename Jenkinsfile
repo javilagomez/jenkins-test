@@ -1,6 +1,9 @@
 node("master") {
     stage("Stage 1") {
-        sh "echo stage 1"
+        parallel(
+            sh "linter",
+            sh "test"
+        )
     }
 
     stage("Stage 2") {
