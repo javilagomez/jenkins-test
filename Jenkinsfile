@@ -1,3 +1,5 @@
+Map tasks = [failFast: false]
+
 tasks["x86"] = { ->
     node("x86") {
         stage("Stage 1") {
