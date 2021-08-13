@@ -1,7 +1,7 @@
 Map tasks = [failFast: false]
 
 tasks["x86"] = { ->
-    node("x86") {
+    node("node 1") {
         stage("Stage 1") {
             parallel(
                 "linter": {sh "echo linter"},
@@ -15,7 +15,7 @@ tasks["x86"] = { ->
     }
 }
 tasks["ARM"] = { ->
-    node("ARM") {
+    node("node 2") {
         stage("Stage 1") {
             parallel(
                 "linter": {sh "echo linter"},
