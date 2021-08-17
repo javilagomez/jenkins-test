@@ -8,7 +8,7 @@ tasks['x86'] = { ->
 }
 tasks['arm'] = { ->
     node('master') {
-        testFlow('arm')
+        archFlow('arm')
     }
 }
 
@@ -22,7 +22,7 @@ node('master') {
 }
 
 def archFlow(String arch) {
-    stage('Build') { 
+    /*stage('Build') { 
         sh "echo build"
     }
     stage('Quality') {
@@ -33,14 +33,25 @@ def archFlow(String arch) {
     }
     stage('Deploy') { 
         sh "echo deploy"
+    }*/
+
+    // Build Jenkinsfile Go web
+
+    // Build context
+    stage('Download tooling') {
+        sh "echo amazon url"
     }
+
+    // Clone repository
+    stage('Checkout') {
+        sh "echo checkout"
+    }
+
+    miniFlow()
 }
 
-def testFlow(String arch) {
-    stage('Quality') {
-        parallel(
-            "Test": { sh "echo test" },
-            "Linter": { sh "echo lint" }
-        )
+def miniFlow() {
+    stage('test') {
+        sh "echo test function into function"
     }
 }
