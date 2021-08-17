@@ -38,8 +38,11 @@ def archFlow(String arch) {
         sh "echo build"
     }
     stage('Quality') {
-        when {
-            isMini { return !config.skipStage2 }
+        stage('Build') { 
+            sh "echo build"
+        }
+        stage('Build') { 
+            sh "echo build"
         }
     }
     stage('Deploy') { 
