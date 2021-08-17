@@ -1,44 +1,54 @@
-stage('Lint') { node { sh 'lint' }  }
+pipeline {
+    agent none
 
-stage('Build') {
-  parallel_stage('Shared') { node { sh 'build' } }
-  parallel_stage('App 1') { node { sh 'build' } }
-  parallel_stage('App 2') { node { sh 'build' } }
-}
+    stages {
+        stage('build and deploy on Windows and Linux') {
+            parallel {
+                stage('windows') {
+                    agent {
+                        label 'windows'
+                    }
+                    stages {
+                        stage('build') {
+                            steps {
+                                bat 'run-build.bat'
+                            }
+                        }
+                        stage('deploy') {
+                            when {
+                                branch 'master'
+                            }
+                            steps {
+                                bat 'run-deploy.bat'
+                            }
+                        }
+                    }
+                }
 
-stage('Test') {
-  parallel_stage('Shared') {
-    parallel_stage('Unit (9.3)') { node { sh 'test' } }
-    parallel_stage('Unit (10.2)') { node { sh 'test' } }
-    parallel_stage('Snapshot (iPhone 7 10.2)') { node { sh 'test' } }
-  }
-
-  parallel_stage('App 1') {
-    parallel_stage('Unit (9.3)') { node { sh 'test' } }
-    parallel_stage('Unit (10.2)') { node { sh 'test' } }
-    parallel_stage('Snapshot (iPhone 7 10.2)') { node { sh 'test' } }
-    parallel_stage('Functional (iPhone 7 10.2)') {
-      parallel_stage('Batch 1') { node { sh 'test' } }
-      parallel_stage('Batch 2' { node { sh 'test' } }
-      parallel_stage('Batch 3') { node { sh 'test' } }
+                stage('linux') {
+                    agent {
+                        label 'linux'
+                    }
+                    stages {
+                        stage('build') {
+                            steps {
+                                sh './run-build.sh'
+                            }
+                        }
+                        stage('deploy') {
+                             when {
+                                 branch 'master'
+                             }
+                             steps {
+                                sh './run-deploy.sh'
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
-
-  parallel_stage('App 2') {
-    parallel_stage('Unit (9.3)') { node { sh 'test' } }
-    parallel_stage('Unit (10.2)') { node { sh 'test' } }
-    parallel_stage('Snapshot (iPhone 7 10.2)') { node { sh 'test' } }
-    parallel_stage('Functional (iPhone 7 10.2)') {
-      parallel_stage('Batch 1') { node { sh 'test' } }
-      parallel_stage('Batch 2' { node { sh 'test' } }
-      parallel_stage('Batch 3') { node { sh 'test' } }
-    }
-    parallel_stage('Functional (iPad Air 2 10.2)') { node { sh 'test' } }
-    parallel_stage('Functional (iPad Pro 10.2)') { node { sh 'test' } }
-  }
 }
-
-stage('Collect') { node { sh 'collect' }  }
 
 // parallel task map
 /*Map tasks = [failFast: false]
