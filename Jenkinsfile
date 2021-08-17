@@ -47,7 +47,15 @@ def archFlow(String arch) {
         sh "echo checkout"
     }
 
-    miniFlow()
+    if(isMini()) {
+        miniFlow()
+    } else {
+        sh "echo Enter to else"
+    }
+}
+
+def isMini() {
+    return true
 }
 
 def miniFlow() {
