@@ -1,39 +1,45 @@
-pipeline {
-    agent none
-
-    stages {
-        stage('build and deploy on Windows and Linux') {
-            parallel {
-                stage('windows') {
-                    stages {
-                        stage('build') {
-                            sh "echo hola"
-                        }
-                        stage('deploy') {
-                            when {
-                                branch 'master'
-                            }
-                            sh "echo hola2"
-                        }
-                    }
+ stage('Realms') {
+    parallel 'aws': {
+        stage('Regions (aws)') {
+            parallel 'us-east-1 (aws)': {
+                stage('Dev (aws us-east-1)') {
+                    echo 'aws us-east-1 dev'
                 }
-
-                stage('linux') {
-                    stages {
-                        stage('build') {
-                            sh "echo hola 3"
-                        }
-                        stage('deploy') {
-                             when {
-                                 branch 'master'
-                             }
-                             sh "echo hola 4"
-                        }
-                    }
+                stage('QA (aws us-east-1)') {
+                    input message: 'Approve aws us-east-1 qa?', ok: 'Approve aws us-east-1 qa!'
+                    echo 'aws us-east-1 qa'
                 }
-            }
+            }, 'us-west-2 (aws)': {
+                stage('Dev (aws us-west-2)') {
+                    echo 'aws us-west-2 dev'
+                }
+                stage('QA (aws us-west-2)') {
+                    input message: 'Approve aws us-west-2 qa?', ok: 'Approve aws us-west-2 qa!'
+                    echo 'aws us-west-2 qa'
+                }
+            }, failFast: false
         }
-    }
+    }, 'gcp': {
+        stage('Regions (gcp)') {
+            parallel 'us-east-1 (gcp)': {
+                stage('Dev (gcp us-east4)') {
+                    echo 'gcp us-east4 dev'
+                }
+                stage('QA (gcp us-east4)') {
+                    input message: 'Approve gcp us-east4 qa?', ok: 'Approve gcp us-east4 qa!'
+                    echo 'gcp us-east4 qa'
+                }
+            }, 'us-west-2 (gcp)': {
+                stage('Dev (gcp us-west4)') {
+                    echo 'gcp us-west4 dev'
+                }
+                stage('QA (gcp us-west4)') {
+                    input message: 'Approve gcp us-west4 qa?', ok: 'Approve gcp us-west4 qa!'
+                    echo 'gcp us-west4 qa'
+                }
+            }, failFast: false
+        }
+    }, failFast: false
 }
 
 // parallel task map
