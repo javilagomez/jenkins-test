@@ -33,12 +33,15 @@ def archFlow(String arch) {
     stage('Build') { 
         sh "echo build"
     }
-    //stage('Quality') {
+    stage('Quality') {
         parallel(
-            "Test": { sh "echo test" },
+            "Test": {
+                hide true
+                sh "echo test"
+            },
             "Lint": { sh "echo lint" }
         )
-    //}
+    }
     stage('Deploy') { 
         sh "echo deploy"
     }
