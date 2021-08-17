@@ -52,6 +52,14 @@ def archFlow(String arch) {
     } else {
         sh "echo Enter to else"
     }
+
+    test = true
+
+    if (test) {
+        stage('Melicov') {
+            sh "echo melicov"
+        }
+    }
 }
 
 def isMini() {
@@ -59,9 +67,41 @@ def isMini() {
 }
 
 def miniFlow() {
-    currentBuild.description = "Version: 1.0"
+    boolDescription = true
+    
+    if(boolDescription) {
+        currentBuild.description = "Version: 1.0 - Branch: feature/test - Commit: 28"
+    } else {
+        currentBuild.description = "PR #8"
+    }
 
-    stage('test') {
-        sh "echo test function into function"
+    stage('Build Environment') {
+        sh "echo build environment"
+    }
+
+    // Build docker image
+    stage('Build Docker Image') {
+        sh "echo build docker image"
+    }
+
+    // If we have migration content and it is not a build, migration node should be visible
+    shouldRunMigrationNode = false
+
+    // Run migration validation and upload if corresponds
+    if (shouldRunMigrationNode) {
+        sh "echo run migration"
+    }
+
+    // When in a build or a pull request with test, the test combo (install dep, test and melicov) should run
+    shouldRunTestNodes = true
+
+    if (shouldRunMigrationNode) {
+        stage('Install Dependencies') {
+            sh "echo install dependencies"
+        }
+
+        stage('Quality') {
+            sh "echo pending parallel"
+        }
     }
 }
