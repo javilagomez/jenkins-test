@@ -33,7 +33,7 @@ def archFlow(String arch) {
     stage('Build') { 
         sh "echo build"
     }
-    stage('Quality') {
+    //stage('Quality') {
         parallel(
             stage('lint') {
                 sh "echo lint 2"
@@ -43,7 +43,7 @@ def archFlow(String arch) {
                 sh "echo test 2"
             }
         )
-    }
+    //}
     stage('Deploy') { 
         sh "echo deploy"
     }
