@@ -1,5 +1,58 @@
+stage('Clone') {
+    checkout scm
+}
+
+testSuites = [ 'suite1', 'suite2', 'suite3' ]
+
+parallel([
+    buildAndTest: {
+        stage('Build') {
+            node('linux') {
+                sh 'make'
+                stash includes: 'pkg/**/*', name: 'build-artifacts'
+            }
+        }
+        stage('Test') {
+            testSteps = [:]
+            for (suite in testSuites) {
+                testSteps[suite] = {
+                    node('linux') {
+                        unstash 'build-artifacts'
+                        sh "run_tests $suite"
+                        stash includes: 'test_results/**/*.xml', name: "test-$suite"
+                    }
+                }
+            }
+            parallel(testSteps)
+        }
+    },
+    docs: {
+        stage('Documentation') {
+            node('windows') {
+                bat 'build_docs.exe'
+            }
+        }
+    },
+    staticAnalysis: {
+        stage('Static Analysis') {
+            node('linux') {
+                sh 'run_static_analysis'
+            }
+        }
+    }
+])
+
+stage('Archive') {
+    unstash 'build-artifacts'
+    for (suite in testSuites) {
+        unstash "test-$suite"
+    }
+    archive 'pkg/**/*'
+    junit 'test_results/**/*.xml'
+}
+
 // parallel task map
-Map tasks = [failFast: false]
+/*Map tasks = [failFast: false]
 
 tasks['x86'] = { ->
     node('master') {
