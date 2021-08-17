@@ -1,4 +1,4 @@
-pipeline {
+/*pipeline {
     agent none
 
     stages {
@@ -34,10 +34,10 @@ pipeline {
             }
         }
     }
-}
+}*/
 
 // parallel task map
-/*Map tasks = [failFast: false]
+Map tasks = [failFast: false]
 
 tasks['x86'] = { ->
     node('master') {
@@ -67,26 +67,7 @@ node('master') {
     }
 }
 
-config = [
-    skipStage2 = false
-]
-
 def archFlow(String arch) {
-    stage('Build') { 
-        sh 'echo build'
-    }
-    stage('Quality') {
-        stage('Build') { 
-            sh 'echo build'
-        }
-        stage('Build') { 
-            sh 'echo build'
-        }
-    }
-    stage('Deploy') { 
-        sh 'echo deploy'
-    }
-
     // Build Jenkinsfile Go web
 
     // Build context
@@ -176,4 +157,4 @@ def miniFlow() {
             sh 'echo Documentation'
         }
     }
-}*/
+}
