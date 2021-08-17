@@ -1,4 +1,4 @@
-node("node 2") {
+node("master") {
     stage("Stage 1") {
         parallel(
             "linter": {sh "echo linter"},
