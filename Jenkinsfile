@@ -1,4 +1,4 @@
-/*pipeline {
+pipeline {
     agent none
 
     stages {
@@ -34,10 +34,10 @@
             }
         }
     }
-}*/
+}
 
 // parallel task map
-Map tasks = [failFast: false]
+/*Map tasks = [failFast: false]
 
 tasks['x86'] = { ->
     node('master') {
@@ -157,4 +157,4 @@ def miniFlow() {
             sh 'echo Documentation'
         }
     }
-}
+}*/
