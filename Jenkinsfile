@@ -55,10 +55,12 @@ def archFlow(String arch) {
 }
 
 def isMini() {
-    return false
+    return true
 }
 
 def miniFlow() {
+    currentBuild.description = "Version: 1.0"
+
     stage('test') {
         sh "echo test function into function"
     }
