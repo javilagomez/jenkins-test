@@ -19,6 +19,14 @@ node('master') {
     stage('Publish') { 
         sh "echo publish"
     }
+
+    test = true
+
+    if (test) {
+        stage('Melicov') {
+            sh "echo melicov"
+        }
+    }
 }
 
 def archFlow(String arch) {
@@ -51,14 +59,6 @@ def archFlow(String arch) {
         miniFlow()
     } else {
         sh "echo Enter to else"
-    }
-
-    test = true
-
-    if (test) {
-        stage('Melicov') {
-            sh "echo melicov"
-        }
     }
 }
 
