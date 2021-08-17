@@ -95,7 +95,7 @@ def miniFlow() {
     // When in a build or a pull request with test, the test combo (install dep, test and melicov) should run
     shouldRunTestNodes = true
 
-    if (shouldRunMigrationNode) {
+    if (shouldRunTestNodes) {
         stage('Install Dependencies') {
             sh "echo install dependencies"
         }
