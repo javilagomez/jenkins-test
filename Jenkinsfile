@@ -93,8 +93,8 @@ def archFlow(String arch) {
 
     // Build Jenkinsfile Go web
 
-    // Build context*/
-    /*stage('Download tooling') {
+    // Build context
+    stage('Download tooling') {
         sh "echo amazon url"
     }
 
