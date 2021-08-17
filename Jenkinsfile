@@ -29,18 +29,18 @@ node('master') {
     }
 }
 
+config = [
+    skipStage2 = false
+]
+
 def archFlow(String arch) {
     stage('Build') { 
         sh "echo build"
     }
     stage('Quality') {
-        parallel(
-            "Test": {
-                sh "echo test"
-                archive "test"
-            },
-            "Lint": { sh "echo lint" }
-        )
+        when {
+            isMini { return !config.skipStage2 }
+        }
     }
     stage('Deploy') { 
         sh "echo deploy"
