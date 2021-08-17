@@ -16,7 +16,9 @@ tasks['arm'] = { ->
 parallel(tasks)
 
 node('master') {  
-    archFlow('x86')
+    stage('Publish') { 
+        sh "echo publish"
+    }
 }
 
 def archFlow(String arch) {
