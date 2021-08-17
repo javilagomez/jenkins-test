@@ -39,9 +39,9 @@ def archFlow(String arch) {
                 sh "echo lint 2"
             }
 
-            stage('test') {
+            /*stage('test') {
                 sh "echo test 2"
-            }
+            }*/
         )
     }
     stage('Deploy') { 
