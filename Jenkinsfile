@@ -1,4 +1,8 @@
 node {  
+    archFlow('x86')
+}
+
+def archFlow(String arch) {
     stage('Build') { 
         sh "echo build"
     }
