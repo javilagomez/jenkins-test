@@ -26,10 +26,11 @@ def archFlow(String arch) {
         sh "echo build"
     }
     stage('Quality') {
-        parallel(
+        /*parallel(
             "Test": { sh "echo test" },
             "Linter": { sh "echo lint" }
-        )  
+        )*/
+        sh "echo deploy" 
     }
     stage('Deploy') { 
         sh "echo deploy"
