@@ -16,16 +16,16 @@ tasks['arm'] = { ->
 parallel(tasks)
 
 node('master') {  
-    stage('Publish') { 
-        sh "echo publish"
-    }
-
     test = true
 
     if (test) {
         stage('Melicov') {
             sh "echo melicov"
         }
+    }
+    
+    stage('Publish') { 
+        sh "echo publish"
     }
 }
 
