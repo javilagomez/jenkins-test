@@ -1,10 +1,14 @@
 Map tasks = [failFast: false]
 
 tasks["master"] = { ->
-    node("master")
+    node("master") {
+        archFlow("master")
+    }
 }
 tasks["main"] = { ->
-    node("master")
+    node("master") {
+        archFlow("main")
+    }
 }
 
 //Run both tasks in paralell
@@ -20,5 +24,11 @@ node("master") {
 
     stage("Stage 2") {
         sh "echo stage 2"
+    }
+}
+
+archFlow(String arch) {
+    stage("Stage 3") {
+        sh "echo stage 3"
     }
 }
