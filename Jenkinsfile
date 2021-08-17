@@ -105,7 +105,7 @@ def miniFlow() {
         }
     }
 
-    if (!shouldRunMigrationNode) {
+    if (shouldRunMigrationNode) {
         if (!shouldRunTestNodes) {
             stage('Install Dependencies') {
                 sh "echo install dependencies 2"
