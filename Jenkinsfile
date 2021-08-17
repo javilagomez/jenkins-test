@@ -7,17 +7,13 @@ pipeline {
                 stage('windows') {
                     stages {
                         stage('build') {
-                            steps {
-                                bat 'run-build.bat'
-                            }
+                            sh "echo hola"
                         }
                         stage('deploy') {
                             when {
                                 branch 'master'
                             }
-                            steps {
-                                bat 'run-deploy.bat'
-                            }
+                            sh "echo hola2"
                         }
                     }
                 }
@@ -25,17 +21,13 @@ pipeline {
                 stage('linux') {
                     stages {
                         stage('build') {
-                            steps {
-                                sh './run-build.sh'
-                            }
+                            sh "echo hola 3"
                         }
                         stage('deploy') {
                              when {
                                  branch 'master'
                              }
-                             steps {
-                                sh './run-deploy.sh'
-                            }
+                             sh "echo hola 4"
                         }
                     }
                 }
