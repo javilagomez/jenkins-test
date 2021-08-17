@@ -67,12 +67,12 @@ def isMini() {
 }
 
 def miniFlow() {
-    boolDescription = true
+    boolDescription = false
     
     if(boolDescription) {
         currentBuild.description = "Version: 1.0 - Branch: feature/test - Commit: 28"
     } else {
-        currentBuild.description = "PR #8"
+        currentBuild.description = "PR #8 - url"
     }
 
     stage('Build Environment') {
