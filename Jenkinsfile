@@ -1,12 +1,12 @@
 node {  
-    stage('Build') {
-        steps {
-            sh "echo pre build"
-            sh "echo build"
-        } 
+    stage('Build') { 
+        sh "echo build"
     }
-    stage('Test') { 
-        sh "echo test" 
+    stage('Quality') {
+        paralell(
+            "Test": { sh "echo test" },
+            "Linter": { sh "echo lint" }
+        )  
     }
     stage('Deploy') { 
         sh "echo deploy"
