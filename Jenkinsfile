@@ -1,44 +1,44 @@
-stage("Lint") { node { sh "lint" }  }
+stage('Lint') { node { sh 'lint' }  }
 
-stage("Build") {
-  parallel_stage("Shared") { node { sh "build" } }
-  parallel_stage("App 1") { node { sh "build" } }
-  parallel_stage("App 2") { node { sh "build" } }
+stage('Build') {
+  parallel_stage('Shared') { node { sh 'build' } }
+  parallel_stage('App 1') { node { sh 'build' } }
+  parallel_stage('App 2') { node { sh 'build' } }
 }
 
-stage("Test") {
-  parallel_stage("Shared") {
-    parallel_stage("Unit (9.3)") { node { sh "test" } }
-    parallel_stage("Unit (10.2)") { node { sh "test" } }
-    parallel_stage("Snapshot (iPhone 7 10.2)") { node { sh "test" } }
+stage('Test') {
+  parallel_stage('Shared') {
+    parallel_stage('Unit (9.3)') { node { sh 'test' } }
+    parallel_stage('Unit (10.2)') { node { sh 'test' } }
+    parallel_stage('Snapshot (iPhone 7 10.2)') { node { sh 'test' } }
   }
 
-  parallel_stage("App 1") {
-    parallel_stage("Unit (9.3)") { node { sh "test" } }
-    parallel_stage("Unit (10.2)") { node { sh "test" } }
-    parallel_stage("Snapshot (iPhone 7 10.2)") { node { sh "test" } }
-    parallel_stage("Functional (iPhone 7 10.2)") {
-      parallel_stage("Batch 1") { node { sh "test" } }
-      parallel_stage("Batch 2" { node { sh "test" } }
-      parallel_stage("Batch 3") { node { sh "test" } }
+  parallel_stage('App 1') {
+    parallel_stage('Unit (9.3)') { node { sh 'test' } }
+    parallel_stage('Unit (10.2)') { node { sh 'test' } }
+    parallel_stage('Snapshot (iPhone 7 10.2)') { node { sh 'test' } }
+    parallel_stage('Functional (iPhone 7 10.2)') {
+      parallel_stage('Batch 1') { node { sh 'test' } }
+      parallel_stage('Batch 2' { node { sh 'test' } }
+      parallel_stage('Batch 3') { node { sh 'test' } }
     }
   }
 
-  parallel_stage("App 2") {
-    parallel_stage("Unit (9.3)") { node { sh "test" } }
-    parallel_stage("Unit (10.2)") { node { sh "test" } }
-    parallel_stage("Snapshot (iPhone 7 10.2)") { node { sh "test" } }
-    parallel_stage("Functional (iPhone 7 10.2)") {
-      parallel_stage("Batch 1") { node { sh "test" } }
-      parallel_stage("Batch 2" { node { sh "test" } }
-      parallel_stage("Batch 3") { node { sh "test" } }
+  parallel_stage('App 2') {
+    parallel_stage('Unit (9.3)') { node { sh 'test' } }
+    parallel_stage('Unit (10.2)') { node { sh 'test' } }
+    parallel_stage('Snapshot (iPhone 7 10.2)') { node { sh 'test' } }
+    parallel_stage('Functional (iPhone 7 10.2)') {
+      parallel_stage('Batch 1') { node { sh 'test' } }
+      parallel_stage('Batch 2' { node { sh 'test' } }
+      parallel_stage('Batch 3') { node { sh 'test' } }
     }
-    parallel_stage("Functional (iPad Air 2 10.2)") { node { sh "test" } }
-    parallel_stage("Functional (iPad Pro 10.2)") { node { sh "test" } }
+    parallel_stage('Functional (iPad Air 2 10.2)') { node { sh 'test' } }
+    parallel_stage('Functional (iPad Pro 10.2)') { node { sh 'test' } }
   }
 }
 
-stage("Collect") { node { sh "collect" }  }
+stage('Collect') { node { sh 'collect' }  }
 
 // parallel task map
 /*Map tasks = [failFast: false]
@@ -62,12 +62,12 @@ node('master') {
 
     if (test) {
         stage('Melicov') {
-            sh "echo melicov"
+            sh 'echo melicov'
         }
     }
     
     stage('Publish') { 
-        sh "echo publish"
+        sh 'echo publish'
     }
 }
 
@@ -77,36 +77,36 @@ config = [
 
 def archFlow(String arch) {
     stage('Build') { 
-        sh "echo build"
+        sh 'echo build'
     }
     stage('Quality') {
         stage('Build') { 
-            sh "echo build"
+            sh 'echo build'
         }
         stage('Build') { 
-            sh "echo build"
+            sh 'echo build'
         }
     }
     stage('Deploy') { 
-        sh "echo deploy"
+        sh 'echo deploy'
     }
 
     // Build Jenkinsfile Go web
 
     // Build context
     stage('Download tooling') {
-        sh "echo amazon url"
+        sh 'echo amazon url'
     }
 
     // Clone repository
     stage('Checkout') {
-        sh "echo checkout"
+        sh 'echo checkout'
     }
 
     if(isMini()) {
         miniFlow()
     } else {
-        sh "echo Enter to else"
+        sh 'echo Enter to else'
     }
 }
 
@@ -118,18 +118,18 @@ def miniFlow() {
     boolDescription = false
     
     if(boolDescription) {
-        currentBuild.description = "Version: 1.0 - Branch: feature/test - Commit: 28"
+        currentBuild.description = 'Version: 1.0 - Branch: feature/test - Commit: 28'
     } else {
-        currentBuild.description = "PR #8 - url"
+        currentBuild.description = 'PR #8 - url'
     }
 
     stage('Build Environment') {
-        sh "echo build environment"
+        sh 'echo build environment'
     }
 
     // Build docker image
     stage('Build Docker Image') {
-        sh "echo build docker image"
+        sh 'echo build docker image'
     }
 
     // If we have migration content and it is not a build, migration node should be visible
@@ -137,7 +137,7 @@ def miniFlow() {
 
     // Run migration validation and upload if corresponds
     if (shouldRunMigrationNode) {
-        sh "echo run migration"
+        sh 'echo run migration'
     }
 
     // When in a build or a pull request with test, the test combo (install dep, test and melicov) should run
@@ -145,39 +145,39 @@ def miniFlow() {
 
     if (shouldRunTestNodes) {
         stage('Install Dependencies') {
-            sh "echo install dependencies"
+            sh 'echo install dependencies'
         }
 
         stage('Quality') {
-            sh "echo pending parallel"
+            sh 'echo pending parallel'
         }
     }
 
     if (shouldRunMigrationNode) {
         if (!shouldRunTestNodes) {
             stage('Install Dependencies') {
-                sh "echo install dependencies 2"
+                sh 'echo install dependencies 2'
             }
         }
 
         stage('Build') {
-            sh "echo build 2"
+            sh 'echo build 2'
         }
 
         stage('OSS') {
-            sh "echo oss"
+            sh 'echo oss'
         }
 
         stage('Meli System') {
-            sh "echo meli system"
+            sh 'echo meli system'
         }
 
         stage('Publish to registries') {
-            sh "echo pending to parallel publish 2"
+            sh 'echo pending to parallel publish 2'
         }
 
         stage('Publish Documentation') {
-            sh "echo Documentation"
+            sh 'echo Documentation'
         }
     }
 }*/
