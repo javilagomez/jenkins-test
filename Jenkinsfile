@@ -3,7 +3,7 @@ node {
         sh "echo build"
     }
     stage('Quality') {
-        paralell(
+        parallel(
             "Test": { sh "echo test" },
             "Linter": { sh "echo lint" }
         )  
