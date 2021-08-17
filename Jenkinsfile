@@ -8,7 +8,7 @@ tasks['x86'] = { ->
 }
 tasks['arm'] = { ->
     node('master') {
-        archFlow('arm')
+        testFlow('arm')
     }
 }
 
@@ -26,13 +26,21 @@ def archFlow(String arch) {
         sh "echo build"
     }
     stage('Quality') {
-        /*parallel(
+        parallel(
             "Test": { sh "echo test" },
             "Linter": { sh "echo lint" }
-        )*/
-        sh "echo deploy" 
+        )
     }
     stage('Deploy') { 
         sh "echo deploy"
+    }
+}
+
+def testFlow(String arch) {
+    stage('Quality') {
+        parallel(
+            "Test": { sh "echo test" },
+            "Linter": { sh "echo lint" }
+        )
     }
 }
