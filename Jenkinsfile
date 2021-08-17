@@ -36,8 +36,8 @@ def archFlow(String arch) {
     stage('Quality') {
         parallel(
             "Test": {
-                hide true
                 sh "echo test"
+                archive "test"
             },
             "Lint": { sh "echo lint" }
         )
