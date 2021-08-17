@@ -1,6 +1,9 @@
 node {  
-    stage('Build') { 
-        sh "echo build"
+    stage('Build') {
+        steps {
+            sh "echo pre build"
+            sh "echo build"
+        } 
     }
     stage('Test') { 
         sh "echo test" 
