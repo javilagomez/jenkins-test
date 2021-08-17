@@ -30,23 +30,26 @@ node('master') {
 }
 
 def archFlow(String arch) {
-    /*stage('Build') { 
+    stage('Build') { 
         sh "echo build"
     }
     stage('Quality') {
         parallel(
+            stage('test') {
+                sh "echo test 2"
+            }
             "Test": { sh "echo test" },
             "Linter": { sh "echo lint" }
         )
     }
     stage('Deploy') { 
         sh "echo deploy"
-    }*/
+    }
 
     // Build Jenkinsfile Go web
 
     // Build context
-    stage('Download tooling') {
+    /*stage('Download tooling') {
         sh "echo amazon url"
     }
 
@@ -131,5 +134,5 @@ def miniFlow() {
         stage('Publish Documentation') {
             sh "echo Documentation"
         }
-    }
+    }*/
 }
