@@ -55,7 +55,7 @@ def archFlow(String arch) {
 }
 
 def isMini() {
-    return true
+    return false
 }
 
 def miniFlow() {
