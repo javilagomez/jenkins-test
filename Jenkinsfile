@@ -104,4 +104,32 @@ def miniFlow() {
             sh "echo pending parallel"
         }
     }
+
+    if (!shouldRunMigrationNode) {
+        if (!shouldRunTestNodes) {
+            stage('Install Dependencies') {
+                sh "echo install dependencies 2"
+            }
+        }
+
+        stage('Build') {
+            sh "echo build 2"
+        }
+
+        stage('OSS') {
+            sh "echo oss"
+        }
+
+        stage('Meli System') {
+            sh "echo meli system"
+        }
+
+        stage('Publish to registries') {
+            sh "echo pending to parallel publish 2"
+        }
+
+        stage('Publish Documentation') {
+            sh "echo Documentation"
+        }
+    }
 }
