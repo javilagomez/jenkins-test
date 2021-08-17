@@ -1,55 +1,44 @@
-stage('Clone') {
-    checkout scm
+stage("Lint") { node { sh "lint" }  }
+
+stage("Build") {
+  parallel_stage("Shared") { node { sh "build" } }
+  parallel_stage("App 1") { node { sh "build" } }
+  parallel_stage("App 2") { node { sh "build" } }
 }
 
-testSuites = [ 'suite1', 'suite2', 'suite3' ]
+stage("Test") {
+  parallel_stage("Shared") {
+    parallel_stage("Unit (9.3)") { node { sh "test" } }
+    parallel_stage("Unit (10.2)") { node { sh "test" } }
+    parallel_stage("Snapshot (iPhone 7 10.2)") { node { sh "test" } }
+  }
 
-parallel([
-    buildAndTest: {
-        stage('Build') {
-            node('linux') {
-                sh 'make'
-                stash includes: 'pkg/**/*', name: 'build-artifacts'
-            }
-        }
-        stage('Test') {
-            testSteps = [:]
-            for (suite in testSuites) {
-                testSteps[suite] = {
-                    node('linux') {
-                        unstash 'build-artifacts'
-                        sh "run_tests $suite"
-                        stash includes: 'test_results/**/*.xml', name: "test-$suite"
-                    }
-                }
-            }
-            parallel(testSteps)
-        }
-    },
-    docs: {
-        stage('Documentation') {
-            node('windows') {
-                bat 'build_docs.exe'
-            }
-        }
-    },
-    staticAnalysis: {
-        stage('Static Analysis') {
-            node('linux') {
-                sh 'run_static_analysis'
-            }
-        }
+  parallel_stage("App 1") {
+    parallel_stage("Unit (9.3)") { node { sh "test" } }
+    parallel_stage("Unit (10.2)") { node { sh "test" } }
+    parallel_stage("Snapshot (iPhone 7 10.2)") { node { sh "test" } }
+    parallel_stage("Functional (iPhone 7 10.2)") {
+      parallel_stage("Batch 1") { node { sh "test" } }
+      parallel_stage("Batch 2" { node { sh "test" } }
+      parallel_stage("Batch 3") { node { sh "test" } }
     }
-])
+  }
 
-stage('Archive') {
-    unstash 'build-artifacts'
-    for (suite in testSuites) {
-        unstash "test-$suite"
+  parallel_stage("App 2") {
+    parallel_stage("Unit (9.3)") { node { sh "test" } }
+    parallel_stage("Unit (10.2)") { node { sh "test" } }
+    parallel_stage("Snapshot (iPhone 7 10.2)") { node { sh "test" } }
+    parallel_stage("Functional (iPhone 7 10.2)") {
+      parallel_stage("Batch 1") { node { sh "test" } }
+      parallel_stage("Batch 2" { node { sh "test" } }
+      parallel_stage("Batch 3") { node { sh "test" } }
     }
-    archive 'pkg/**/*'
-    junit 'test_results/**/*.xml'
+    parallel_stage("Functional (iPad Air 2 10.2)") { node { sh "test" } }
+    parallel_stage("Functional (iPad Pro 10.2)") { node { sh "test" } }
+  }
 }
+
+stage("Collect") { node { sh "collect" }  }
 
 // parallel task map
 /*Map tasks = [failFast: false]
