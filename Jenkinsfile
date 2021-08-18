@@ -15,11 +15,11 @@ tasks['arm'] = { ->
 //Run both tasks in paralell
 parallel(tasks)
 
-ctx_build = true
-ctx_migration = true
-ctx_test = true
-
 node('master') {
+    ctx_build = true
+    ctx_migration = true
+    ctx_test = true
+
     if (!ctx_build && ctx_test) {
         stage('Melicov') {
             sh 'echo melicov'
@@ -57,6 +57,10 @@ def isMini() {
 }
 
 def miniFlow() {  
+    ctx_build = true
+    ctx_migration = true
+    ctx_test = true
+
     if(ctx_build) {
         currentBuild.description = 'Version: 1.0 - Branch: feature/test - Commit: 28'
     } else {
@@ -123,18 +127,5 @@ def miniFlow() {
         stage('Publish Documentation') {
             sh 'echo Documentation'
         }
-    }
-}
-
-def legacyFlow() {
-    if(ctx_build) {
-        currentBuild.description = 'Version: 1.0 - Branch: feature/test - Commit: 28'
-    } else {
-        currentBuild.description = 'PR #8 - url'
-    }
-
-    // Build docker image
-    stage('Build Docker Image') {
-        sh 'echo build docker image'
     }
 }
