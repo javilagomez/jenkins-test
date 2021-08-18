@@ -137,14 +137,4 @@ def legacyFlow() {
     stage('Build Docker Image') {
         sh 'echo build docker image'
     }
-
-    try {
-        stage('Build Environment') {
-            sh 'echo build environment'
-        }
-
-        stage('OSS') {
-            sh 'echo oss'
-        }
-    }
 }
