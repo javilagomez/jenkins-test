@@ -15,10 +15,12 @@ tasks['arm'] = { ->
 //Run both tasks in paralell
 parallel(tasks)
 
-node('master') {  
-    test = true
+ctx_build = true
+ctx_migration = true
+ctx_test = true
 
-    if (test) {
+node('master') {
+    if (!ctx_build && ctx_test) {
         stage('Melicov') {
             sh 'echo melicov'
         }
@@ -31,6 +33,7 @@ node('master') {
 
 def archFlow(String arch) {
     // Build Jenkinsfile Go web
+    sh 'echo entré a archflow'
 
     // Build context
     stage('Download tooling') {
@@ -53,10 +56,8 @@ def isMini() {
     return true
 }
 
-def miniFlow() {
-    boolDescription = false
-    
-    if(boolDescription) {
+def miniFlow() {  
+    if(ctx_build) {
         currentBuild.description = 'Version: 1.0 - Branch: feature/test - Commit: 28'
     } else {
         currentBuild.description = 'PR #8 - url'
@@ -72,7 +73,7 @@ def miniFlow() {
     }
 
     // If we have migration content and it is not a build, migration node should be visible
-    shouldRunMigrationNode = false
+    shouldRunMigrationNode = ctx_migration && ctx_build
 
     // Run migration validation and upload if corresponds
     if (shouldRunMigrationNode) {
@@ -80,7 +81,7 @@ def miniFlow() {
     }
 
     // When in a build or a pull request with test, the test combo (install dep, test and melicov) should run
-    shouldRunTestNodes = true
+    shouldRunTestNodes = ctx_test
 
     if (shouldRunTestNodes) {
         stage('Install Dependencies') {
@@ -121,6 +122,29 @@ def miniFlow() {
 
         stage('Publish Documentation') {
             sh 'echo Documentation'
+        }
+    }
+}
+
+def legacyFlow() {
+    if(ctx_build) {
+        currentBuild.description = 'Version: 1.0 - Branch: feature/test - Commit: 28'
+    } else {
+        currentBuild.description = 'PR #8 - url'
+    }
+
+    // Build docker image
+    stage('Build Docker Image') {
+        sh 'echo build docker image'
+    }
+
+    try {
+        stage('Build Environment') {
+            sh 'echo build environment'
+        }
+
+        stage('OSS') {
+            sh 'echo oss'
         }
     }
 }
