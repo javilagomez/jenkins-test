@@ -1,49 +1,5 @@
- stage('Realms') {
-    parallel 'aws': {
-        stage('Regions (aws)') {
-            parallel 'us-east-1 (aws)': {
-                stage('Dev (aws us-east-1)') {
-                    echo 'aws us-east-1 dev'
-                }
-                stage('QA (aws us-east-1)') {
-                    input message: 'Approve aws us-east-1 qa?', ok: 'Approve aws us-east-1 qa!'
-                    echo 'aws us-east-1 qa'
-                }
-            }, 'us-west-2 (aws)': {
-                stage('Dev (aws us-west-2)') {
-                    echo 'aws us-west-2 dev'
-                }
-                stage('QA (aws us-west-2)') {
-                    input message: 'Approve aws us-west-2 qa?', ok: 'Approve aws us-west-2 qa!'
-                    echo 'aws us-west-2 qa'
-                }
-            }, failFast: false
-        }
-    }, 'gcp': {
-        stage('Regions (gcp)') {
-            parallel 'us-east-1 (gcp)': {
-                stage('Dev (gcp us-east4)') {
-                    echo 'gcp us-east4 dev'
-                }
-                stage('QA (gcp us-east4)') {
-                    input message: 'Approve gcp us-east4 qa?', ok: 'Approve gcp us-east4 qa!'
-                    echo 'gcp us-east4 qa'
-                }
-            }, 'us-west-2 (gcp)': {
-                stage('Dev (gcp us-west4)') {
-                    echo 'gcp us-west4 dev'
-                }
-                stage('QA (gcp us-west4)') {
-                    input message: 'Approve gcp us-west4 qa?', ok: 'Approve gcp us-west4 qa!'
-                    echo 'gcp us-west4 qa'
-                }
-            }, failFast: false
-        }
-    }, failFast: false
-}
-
 // parallel task map
-/*Map tasks = [failFast: false]
+Map tasks = [failFast: false]
 
 tasks['x86'] = { ->
     node('master') {
@@ -131,8 +87,12 @@ def miniFlow() {
             sh 'echo install dependencies'
         }
 
-        stage('Quality') {
-            sh 'echo pending parallel'
+        stage('Lint') {
+            sh 'echo pending lint'
+        }
+
+        stage('Test') {
+            sh 'echo pending test'
         }
     }
 
@@ -163,4 +123,4 @@ def miniFlow() {
             sh 'echo Documentation'
         }
     }
-}*/
+}
