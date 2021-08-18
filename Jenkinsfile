@@ -87,12 +87,14 @@ def miniFlow() {
             sh 'echo install dependencies'
         }
 
-        stage('Lint') {
-            sh 'echo pending lint'
-        }
+        stage("Quality") {
+            stage('Lint') {
+                sh 'echo pending lint'
+            }
 
-        stage('Test') {
-            sh 'echo pending test'
+            stage('Test') {
+                sh 'echo pending test'
+            }
         }
     }
 
