@@ -1,5 +1,5 @@
 // parallel task map
-Map task = [failFast: false]
+Map tasks = [failFast: false]
 
 tasks['x86'] = { ->
     node('master') {
