@@ -32,9 +32,6 @@ node('master') {
 }
 
 def archFlow(String arch) {
-    // Build Jenkinsfile Go web
-    sh 'echo entré a archflow'
-
     // Build context
     stage('Download tooling') {
         sh 'echo amazon url'
@@ -68,6 +65,8 @@ def miniFlow() {
     ctx_migration = true
     ctx_test = true
 
+    notParallel()
+
     if(ctx_build) {
         currentBuild.description = 'Version: 1.0 - Branch: feature/test - Commit: 28'
     } else {
@@ -85,13 +84,6 @@ def miniFlow() {
 
     // If we have migration content and it is not a build, migration node should be visible
     shouldRunMigrationNode = ctx_migration && ctx_build
-
-    // Run migration validation and upload if corresponds
-    if (shouldRunMigrationNode) {
-        sh 'echo run migration'
-    }
-
-    optional { notParallel() }
 
     // When in a build or a pull request with test, the test combo (install dep, test and melicov) should run
     shouldRunTestNodes = ctx_test
