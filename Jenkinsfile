@@ -56,6 +56,13 @@ def isMini() {
     return true
 }
 
+def notParallel() {
+    // Clone repository
+    stage('Checkout') {
+        sh 'echo checkout'
+    }
+}
+
 def miniFlow() {  
     ctx_build = true
     ctx_migration = true
@@ -83,6 +90,8 @@ def miniFlow() {
     if (shouldRunMigrationNode) {
         sh 'echo run migration'
     }
+
+    optional { notParallel() }
 
     // When in a build or a pull request with test, the test combo (install dep, test and melicov) should run
     shouldRunTestNodes = ctx_test
