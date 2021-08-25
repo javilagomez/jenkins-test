@@ -1,5 +1,6 @@
 // parallel task map
 Map tasks = [failFast: false]
+def image = []
 
 tasks['x86'] = { ->
     node('master') {
@@ -33,6 +34,7 @@ node('master') {
 
 def archFlow(String arch) {
     // Build context
+    sh "echo ${image[arch]}"
     stage('Download tooling') {
         sh 'echo amazon url'
     }
