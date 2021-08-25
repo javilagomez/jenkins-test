@@ -1,6 +1,6 @@
 // parallel task map
 Map tasks = [failFast: false]
-image
+image = [:]
 
 tasks['x86'] = { ->
     node('master') {
