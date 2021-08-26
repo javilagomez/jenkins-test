@@ -28,10 +28,8 @@ node('master') {
         }
     }
     
-    stage('Publish') { 
-        def arch
-        holas[arch] = arch
-        sh "echo ${holas[arch]}"
+    stage('Publish') {
+        sh "echo ${holas['red']}"
     }
 }
 
