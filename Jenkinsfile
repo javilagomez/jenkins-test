@@ -37,7 +37,7 @@ def archFlow(String arch) {
     // Build context
     sh "echo ${image[arch]}"
     stage('Download tooling') {
-        holas[arch] = docker.image("${arch}")
+        holas[arch] = arch
         sh "echo ${holas[arch]}"
     }
 
