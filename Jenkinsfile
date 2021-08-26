@@ -30,7 +30,7 @@ node('master') {
     
     stage('Publish') {
         r = holas
-        sh "echo ${r['red']}"
+        sh "echo ${r['red']} hola"
     }
 }
 
