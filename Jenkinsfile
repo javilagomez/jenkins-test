@@ -2,7 +2,6 @@
 Map tasks = [failFast: false]
 image = [:]
 holas = [red: '', green: '']
-arch
 
 tasks['x86'] = { ->
     node('master') {
@@ -25,6 +24,7 @@ node('master') {
 
     if (!ctx_build && ctx_test) {
         stage('Melicov') {
+            def arch
             holas[arch] = arch
             sh "echo ${holas[arch]}"
         }
