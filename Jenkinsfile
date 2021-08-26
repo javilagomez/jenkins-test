@@ -43,8 +43,8 @@ def archFlow(String arch) {
     sh "echo ${image[arch]}"
     stage('Download tooling') {
         holas[arch] = arch
-        holas.put(arch, arch)
-        sh "echo ${holas.arch}"
+        holas.put("${arch}", arch)
+        sh "echo ${holas.get("${arch}")}"
         sh "echo ${holas[arch]} hola"
     }
 
