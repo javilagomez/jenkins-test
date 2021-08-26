@@ -38,7 +38,7 @@ def archFlow(String arch) {
     sh "echo ${image[arch]}"
     stage('Download tooling') {
         holas[arch] = docker.image("${arch}")
-        sh "echo ${holas[arch].imageName()}"
+        sh "echo ${holas[arch]}"
     }
 
     // Clone repository
