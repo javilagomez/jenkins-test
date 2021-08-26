@@ -33,6 +33,7 @@ def singleFlow(){
         }
         
         stage('Publish') {
+            sh "echo ${holas.get(0)}"
             sh "echo ${holase.get(0)} hola"
         }
     }
@@ -43,10 +44,9 @@ def archFlow(String arch) {
     sh "echo ${image[arch]}"
     stage('Download tooling') {
         holas[arch] = arch
+        sh "echo ${holas.get(0)}"
         sh "echo ${holas[arch]} hola"
     }
-
-    holase >> arch
 
     // Clone repository
     stage('Checkout') {
