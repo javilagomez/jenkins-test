@@ -36,7 +36,9 @@ def archFlow(String arch) {
     // Build context
     sh "echo ${image[arch]}"
     stage('Download tooling') {
-        sh 'echo amazon url'
+        def colors = [red: '#FF0000', green: '#00FF00', blue: '#0000FF']
+
+        sh 'echo ' + colors[red]
     }
 
     // Clone repository
