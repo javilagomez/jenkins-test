@@ -41,6 +41,8 @@ def archFlow(String arch) {
     // Build context
     sh "echo ${image[arch]}"
     stage('Download tooling') {
+        r = [1, 2, 34]
+        sh "echo ${r.get(0)}"
         holas[arch] = arch
         sh "echo ${holas[arch]} hola"
     }
