@@ -32,8 +32,8 @@ def singleFlow(){
         }
         
         stage('Publish') {
-            sh "echo ${holas.get(0)}"
-            sh "echo ${holase.get(0)} hola"
+            sh "echo ${holas.get("x86")}"
+            sh "echo ${holas.get("arm")} hola"
         }
     }
 }
