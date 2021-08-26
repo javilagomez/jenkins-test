@@ -17,8 +17,9 @@ holas = [red: "", green:""]
 
 //Run both tasks in paralell
 parallel(tasks)
+singleFlow()
 
-def singleFlow(String arch) {
+def singleFlow() {
     node('master') {
     ctx_build = true
     ctx_migration = true
