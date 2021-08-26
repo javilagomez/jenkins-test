@@ -13,7 +13,7 @@ tasks['arm'] = { ->
     }
 }
 
-holas = [red: "", green:""]
+holas = [:]
 
 //Run both tasks in paralell
 parallel(tasks)
@@ -32,7 +32,7 @@ def singleFlow(){
         }
         
         stage('Publish') {
-            sh "echo ${holas['red'].value} hola"
+            sh "echo ${holas.get(0)} hola"
         }
     }
 }
