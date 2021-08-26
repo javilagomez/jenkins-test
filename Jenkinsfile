@@ -18,7 +18,8 @@ holas = [red: "", green:""]
 //Run both tasks in paralell
 parallel(tasks)
 
-node('master') {
+def singleFlow(arch) {
+    node('master') {
     ctx_build = true
     ctx_migration = true
     ctx_test = true
@@ -30,9 +31,10 @@ node('master') {
     }
     
     stage('Publish') {
-        r = holas()
-        sh "echo ${r['red']} hola"
+        holas[arch] = arch
+        sh "echo ${holas[arch]} hola"
     }
+}
 }
 
 def archFlow(String arch) {
