@@ -39,7 +39,7 @@ def archFlow(String arch) {
     sh "echo ${image[arch]}"
     stage('Download tooling') {
         holas[arch] = arch
-        sh "echo ${holas[arch]}"
+        sh "echo ${holas[arch]} hola"
     }
 
     // Clone repository
