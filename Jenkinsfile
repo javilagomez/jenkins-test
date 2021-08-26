@@ -24,12 +24,12 @@ node('master') {
 
     if (!ctx_build && ctx_test) {
         stage('Melicov') {
-            sh "echo ${holas['red']}"
+            sh "echo ${holas['red'].imageName()}"
         }
     }
     
     stage('Publish') {
-        sh "echo ${holas['red']}"
+        sh "echo ${holas['red'].imageName()}"
     }
 }
 
