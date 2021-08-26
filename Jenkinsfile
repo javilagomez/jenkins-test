@@ -19,23 +19,23 @@ holas = [red: "", green:""]
 parallel(tasks)
 singleFlow()
 
-def singleFlow() {
+def singleFlow(){
     node('master') {
-    ctx_build = true
-    ctx_migration = true
-    ctx_test = true
+        ctx_build = true
+        ctx_migration = true
+        ctx_test = true
 
-    if (!ctx_build && ctx_test) {
-        stage('Melicov') {
-            sh "echo hola"
+        if (!ctx_build && ctx_test) {
+            stage('Melicov') {
+                sh "echo hola"
+            }
+        }
+        
+        stage('Publish') {
+            holas[arch] = arch
+            sh "echo ${holas[arch]} hola"
         }
     }
-    
-    stage('Publish') {
-        holas[arch] = arch
-        sh "echo ${holas[arch]} hola"
-    }
-}
 }
 
 def archFlow(String arch) {
