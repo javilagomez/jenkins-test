@@ -14,7 +14,7 @@ tasks['arm'] = { ->
 }
 
 holas = [arm: "", x86:""]
-holase = [:]
+holase = []
 
 //Run both tasks in paralell
 parallel(tasks)
@@ -43,9 +43,10 @@ def archFlow(String arch) {
     sh "echo ${image[arch]}"
     stage('Download tooling') {
         holas[arch] = arch
-        holase << arch
         sh "echo ${holas[arch]} hola"
     }
+
+    holase >> arch
 
     // Clone repository
     stage('Checkout') {
