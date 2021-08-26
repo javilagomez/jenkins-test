@@ -13,7 +13,7 @@ tasks['arm'] = { ->
     }
 }
 
-holas = [:]
+holas = [arm: "", x86:""]
 holase = [:]
 
 //Run both tasks in paralell
