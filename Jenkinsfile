@@ -29,7 +29,8 @@ node('master') {
     }
     
     stage('Publish') {
-        sh "echo ${holas['red'].imageName()}"
+        r = holas
+        sh "echo ${r['red']}"
     }
 }
 
