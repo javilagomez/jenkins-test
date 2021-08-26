@@ -36,9 +36,9 @@ def archFlow(String arch) {
     // Build context
     sh "echo ${image[arch]}"
     stage('Download tooling') {
-        def colors = [red: '#FF0000', green: '#00FF00', blue: '#0000FF']
-
-        sh "echo ${colors['red']}"
+        def colors = [red: '', green: '']
+        def arch[arch] = docker.image("${arch}")
+        sh "echo ${colors['red'].imageName()}"
     }
 
     // Clone repository
