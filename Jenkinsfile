@@ -1,7 +1,9 @@
 // parallel task map
 Map tasks = [failFast: false]
 image = [:]
-holas = [red: "", green: ""]
+holas() {
+  return [red: "", green: ""]
+}
 
 tasks['x86'] = { ->
     node('master') {
