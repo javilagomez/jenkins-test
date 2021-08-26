@@ -24,9 +24,7 @@ node('master') {
 
     if (!ctx_build && ctx_test) {
         stage('Melicov') {
-            def arch
-            holas[arch] = arch
-            sh "echo ${holas[arch]}"
+            sh "echo ${holas['red']}"
         }
     }
     
