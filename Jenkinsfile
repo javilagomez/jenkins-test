@@ -38,7 +38,7 @@ def archFlow(String arch) {
     stage('Download tooling') {
         def colors = [red: '#FF0000', green: '#00FF00', blue: '#0000FF']
 
-        sh 'echo ' + colors[red]
+        sh "echo ${colors[red]}"
     }
 
     // Clone repository
