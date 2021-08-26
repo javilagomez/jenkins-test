@@ -1,6 +1,14 @@
-// parallel task map
+GroovyShell shell = new GroovyShell()
+def tools = shell.parse(new File('function_tools.gvy'))
+
+node('master') {
+    stage('Melicov') {
+        tools.greet()
+    }
+}
+
+/*/ parallel task map
 Map tasks = [failFast: false]
-image = [:]
 
 tasks['x86'] = { ->
     node('master') {
@@ -35,6 +43,8 @@ def singleFlow(){
             sh "echo ${holas.get("x86")}"
             sh "echo ${holas.get("arm")} hola"
         }
+
+
     }
 }
 
@@ -43,8 +53,6 @@ def archFlow(String arch) {
     sh "echo ${image[arch]}"
     stage('Download tooling') {
         holas[arch] = arch
-        //holas.put("${arch}", arch)
-        //sh "echo ${holas.get("${arch}")}"
         sh "echo ${holas[arch]} hola"
     }
 
@@ -64,19 +72,10 @@ def isMini() {
     return true
 }
 
-def notParallel() {
-    // Clone repository
-    stage('Checkout') {
-        sh 'echo checkout'
-    }
-}
-
 def miniFlow() {  
     ctx_build = true
     ctx_migration = true
     ctx_test = true
-
-    notParallel()
 
     if(ctx_build) {
         currentBuild.description = 'Version: 1.0 - Branch: feature/test - Commit: 28'
@@ -92,9 +91,6 @@ def miniFlow() {
     stage('Build Docker Image') {
         sh 'echo build docker image'
     }
-
-    // If we have migration content and it is not a build, migration node should be visible
-    shouldRunMigrationNode = ctx_migration && ctx_build
 
     // When in a build or a pull request with test, the test combo (install dep, test and melicov) should run
     shouldRunTestNodes = ctx_test
@@ -112,32 +108,4 @@ def miniFlow() {
             sh 'echo pending test'
         }
     }
-
-    if (shouldRunMigrationNode) {
-        if (!shouldRunTestNodes) {
-            stage('Install Dependencies') {
-                sh 'echo install dependencies 2'
-            }
-        }
-
-        stage('Build') {
-            sh 'echo build 2'
-        }
-
-        stage('OSS') {
-            sh 'echo oss'
-        }
-
-        stage('Meli System') {
-            sh 'echo meli system'
-        }
-
-        stage('Publish to registries') {
-            sh 'echo pending to parallel publish 2'
-        }
-
-        stage('Publish Documentation') {
-            sh 'echo Documentation'
-        }
-    }
-}
+}*/
