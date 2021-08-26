@@ -1,9 +1,6 @@
 // parallel task map
 Map tasks = [failFast: false]
 image = [:]
-class holas() {
-  return [red: "", green: ""]
-}
 
 tasks['x86'] = { ->
     node('master') {
@@ -14,6 +11,10 @@ tasks['arm'] = { ->
     node('master') {
         archFlow('arm')
     }
+}
+
+def holas(String arch) {
+  return [red: "", green: ""]
 }
 
 //Run both tasks in paralell
