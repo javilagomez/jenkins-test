@@ -24,7 +24,7 @@ node('master') {
 
     if (!ctx_build && ctx_test) {
         stage('Melicov') {
-            sh "echo ${holas['red'].imageName()}"
+            sh "echo hola"
         }
     }
     
