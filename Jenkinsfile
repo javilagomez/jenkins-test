@@ -13,7 +13,7 @@ tasks['arm'] = { ->
     }
 }
 
-def holas(String arch) {
+class holas(arch) {
   return [red: "", green: ""]
 }
 
