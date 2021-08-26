@@ -1,6 +1,7 @@
 // parallel task map
 Map tasks = [failFast: false]
 image = [:]
+holas = [red: '', green: '']
 
 tasks['x86'] = { ->
     node('master') {
@@ -36,8 +37,7 @@ def archFlow(String arch) {
     // Build context
     sh "echo ${image[arch]}"
     stage('Download tooling') {
-        def colors = [red: '', green: '']
-        def holas[arch] = docker.image("${arch}")
+        holas[arch] = docker.image("${arch}")
         sh "echo ${holas[arch].imageName()}"
     }
 
