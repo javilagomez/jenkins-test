@@ -13,9 +13,7 @@ tasks['arm'] = { ->
     }
 }
 
-class holas(arch) {
-  return [red: "", green: ""]
-}
+holas = [red: "", green:""]
 
 //Run both tasks in paralell
 parallel(tasks)
