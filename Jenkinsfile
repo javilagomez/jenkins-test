@@ -14,6 +14,7 @@ tasks['arm'] = { ->
 }
 
 holas = [:]
+holase = [:]
 
 //Run both tasks in paralell
 parallel(tasks)
@@ -32,7 +33,7 @@ def singleFlow(){
         }
         
         stage('Publish') {
-            sh "echo ${holas.get(0)} hola"
+            sh "echo ${holase.get(0)} hola"
         }
     }
 }
@@ -42,7 +43,7 @@ def archFlow(String arch) {
     sh "echo ${image[arch]}"
     stage('Download tooling') {
         holas[arch] = arch
-        holas << arch
+        holase << arch
         sh "echo ${holas[arch]} hola"
     }
 
