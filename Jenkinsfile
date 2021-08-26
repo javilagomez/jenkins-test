@@ -1,7 +1,7 @@
 // parallel task map
 Map tasks = [failFast: false]
 image = [:]
-holas() {
+def holas() {
   return [red: "", green: ""]
 }
 
