@@ -43,7 +43,6 @@ def archFlow(String arch) {
     stage('Download tooling') {
         holas[arch] = arch
         holas << arch
-        sh "echo ${holas.size()}"
         sh "echo ${holas[arch]} hola"
     }
 
