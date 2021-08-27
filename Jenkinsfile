@@ -12,8 +12,12 @@ tasks['arm'] = { ->
 }
 
 //Run both tasks in paralell
-parallel(tasks)
-singleFlow()
+def testFlow(String arch) {
+    if (arch == "x86") {
+        parallel(tasks)
+        singleFlow()
+    }
+}
 
 def singleFlow(){
     node('master') {
