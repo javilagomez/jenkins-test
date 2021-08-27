@@ -70,7 +70,11 @@ def miniFlow(arch) {
 
     if (arch == "x86") {
         stage('Build Environment') {
-            sh "echo error" m
+            try {
+                sh "echo error" m
+            } catch(e) {
+                echo currentBuild.result = "FAILURE"
+            }
         }
     }
 
