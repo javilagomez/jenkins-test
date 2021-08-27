@@ -14,16 +14,9 @@ tasks['arm'] = { ->
 build_ok = true
 
 //Run both tasks in paralell
-try {
-    parallel(tasks)
-    singleFlow()
-} catch(e) {
-    build_ok = false
-    sh "echo ${e.toString()}"
-}
+parallel(tasks)
+singleFlow()
 
-// cleanup
-sh "rm -rf *"
 
 def singleFlow(){
     node('master') {
@@ -74,6 +67,7 @@ def miniFlow(arch) {
                 sh "echo error" m
             } catch(e) {
                 echo currentBuild.result = "FAILURE"
+                echo e.toString()
             }
         }
     }
