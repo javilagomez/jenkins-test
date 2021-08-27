@@ -86,7 +86,9 @@ def miniFlow(arch) {
 
     stage('publish result') {
         sh "echo pipeline: ${build_ok}"
-        sh "echo ${arch}"
+        if(!build_ok) {
+            sh "echo ${arch}"
+        }
     }
 }
 
