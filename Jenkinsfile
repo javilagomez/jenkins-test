@@ -1,9 +1,70 @@
-GroovyShell shell = new GroovyShell()
-def tools = shell.parse(new File('Jenkinsfile-h.gvy'))
+Map tasks = [failFast: false]
 
-node('master') {
-    stage('Melicov') {
-        tools.greet()
+tasks['x86'] = { ->
+    node('master') {
+        archFlow('x86')
+    }
+}
+tasks['arm'] = { ->
+    node('master') {
+        archFlow('arm')
+    }
+}
+
+//Run both tasks in paralell
+parallel(tasks)
+singleFlow()
+
+def singleFlow(){
+    node('master') {
+        stage('Melicov') {
+            sh "echo melicov"
+        }
+        
+        stage('Publish') {
+            sh "echo publish"
+        }
+    }
+}
+
+def archFlow(String arch) {
+    // Build context
+    stage('Download tooling') {
+        sh "echo download tooling"
+    }
+
+    // Clone repository
+    stage('Checkout') {
+        sh 'echo checkout'
+    }
+
+    if(isMini()) {
+        miniFlow()
+    } else {
+        sh 'echo Enter to else'
+    }
+}
+
+def isMini() {
+    return true
+}
+
+def miniFlow() {  
+    ctx_build = true
+
+    if(ctx_build) {
+        currentBuild.description = 'Version: 1.0 - Branch: feature/test - Commit: 28'
+    } else {
+        currentBuild.description = 'PR #8 - url'
+    }
+
+    stage('Build Environment') {
+        sh 'echo build environment'
+    }
+
+    // Build docker image
+    stage('Build Docker Image') {
+        sh 'echo build docker image'
     }
 }
 
