@@ -22,6 +22,9 @@ try {
     sh "echo ${e.toString()}"
 }
 
+// cleanup
+sh "rm -rf *"
+
 def singleFlow(){
     node('master') {
         stage('Melicov') {
