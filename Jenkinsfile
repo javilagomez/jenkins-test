@@ -11,6 +11,8 @@ tasks['arm'] = { ->
     }
 }
 
+build_ok = true
+
 //Run both tasks in paralell
 parallel(tasks)
 singleFlow()
@@ -60,13 +62,21 @@ def miniFlow(arch) {
 
     if (arch == "x86") {
         stage('Build Environment') {
-            currentBuild.result = "FAILURE"
+            sh "echo error" m
         }
     }
 
     // Build docker image
     stage('Build Docker Image') {
         sh 'echo build docker image'
+    }
+
+    if(build_ok) {
+        if(build_ok) {
+            currentBuild.result = "SUCCESS"
+        } else {
+            currentBuild.result = "FAILURE"
+        }
     }
 }
 
