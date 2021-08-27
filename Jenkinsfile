@@ -14,8 +14,13 @@ tasks['arm'] = { ->
 build_ok = true
 
 //Run both tasks in paralell
-parallel(tasks)
-singleFlow()
+try {
+    parallel(tasks)
+    singleFlow()
+} catch(e) {
+    build_ok = false
+    echo e.toString()
+}
 
 def singleFlow(){
     node('master') {
