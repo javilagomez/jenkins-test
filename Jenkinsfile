@@ -78,6 +78,10 @@ def miniFlow(arch) {
             currentBuild.result = "FAILURE"
         }
     }
+
+    stage('publish result') {
+        sh "echo pipeline: ${build_ok}"
+    }
 }
 
 /*/ parallel task map
