@@ -58,9 +58,9 @@ def miniFlow(arch) {
         currentBuild.description = 'PR #8 - url'
     }
 
-    if (arch == "arm") {
+    if (arch == "x86") {
         stage('Build Environment') {
-            sh 'echo build environment'm
+            sh 'echo build environment' m
         }
     }
 
