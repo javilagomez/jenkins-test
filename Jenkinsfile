@@ -66,7 +66,7 @@ def miniFlow(arch) {
             try {
                 sh "echo error" m
             } catch(e) {
-                echo currentBuild.result = "FAILURE"
+                currentBuild.result = "FAILURE"
                 echo e.toString()
             }
         }
