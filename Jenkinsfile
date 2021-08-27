@@ -12,12 +12,8 @@ tasks['arm'] = { ->
 }
 
 //Run both tasks in paralell
-def testFlow(String arch) {
-    if (arch == "x86") {
-        parallel(tasks)
-        singleFlow()
-    }
-}
+parallel(tasks)
+singleFlow()
 
 def singleFlow(){
     node('master') {
@@ -62,8 +58,10 @@ def miniFlow() {
         currentBuild.description = 'PR #8 - url'
     }
 
-    stage('Build Environment') {
-        sh 'echo build environment'
+    if (arch == "x86") {
+        stage('Build Environment') {
+            sh 'echo build environment'
+        }
     }
 
     // Build docker image
