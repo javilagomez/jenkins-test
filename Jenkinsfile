@@ -19,7 +19,6 @@ try {
     singleFlow()
 } catch(e) {
     build_ok = false
-    sh "echo ${build_ok}"
     echo e.toString()
 }
 
