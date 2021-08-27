@@ -19,7 +19,7 @@ try {
     singleFlow()
 } catch(e) {
     build_ok = false
-    echo e.toString()
+    sh "echo ${e.toString()}"
 }
 
 def singleFlow(){
@@ -81,6 +81,7 @@ def miniFlow(arch) {
             currentBuild.result = "SUCCESS"
         } else {
             currentBuild.result = "FAILURE"
+            sh "echo ${arch}"
         }
     }
 
