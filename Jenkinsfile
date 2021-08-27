@@ -19,6 +19,7 @@ try {
     singleFlow()
 } catch(e) {
     build_ok = false
+    echo build_ok
     echo e.toString()
 }
 
