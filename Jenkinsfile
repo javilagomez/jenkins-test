@@ -7,7 +7,11 @@ tasks['x86'] = { ->
 }
 tasks['arm'] = { ->
     node('master') {
-        archFlow('arm')
+        try {
+            archFlow('arm')
+        } catch(error) {
+            currentBuild.result = "FAILURE"
+        }
     }
 }
 
@@ -63,12 +67,7 @@ def miniFlow(arch) {
 
     if (arch == "x86") {
         stage('Build Environment') {
-            try {
-                sh "echo error" m
-            } catch(e) {
-                currentBuild.result = "FAILURE"
-                echo e.toString()
-            }
+            sh "echo error" m
         }
     }
 
@@ -87,9 +86,6 @@ def miniFlow(arch) {
 
     stage('publish result') {
         sh "echo pipeline: ${build_ok}"
-        if(!build_ok) {
-            sh "echo ${arch}"
-        }
     }
 }
 
