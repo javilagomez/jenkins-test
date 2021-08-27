@@ -81,12 +81,12 @@ def miniFlow(arch) {
             currentBuild.result = "SUCCESS"
         } else {
             currentBuild.result = "FAILURE"
-            sh "echo ${arch}"
         }
     }
 
     stage('publish result') {
         sh "echo pipeline: ${build_ok}"
+        sh "echo ${arch}"
     }
 }
 
