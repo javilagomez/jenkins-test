@@ -39,7 +39,7 @@ def archFlow(String arch) {
     }
 
     if(isMini()) {
-        miniFlow()
+        miniFlow(arch)
     } else {
         sh 'echo Enter to else'
     }
@@ -49,7 +49,7 @@ def isMini() {
     return true
 }
 
-def miniFlow() {  
+def miniFlow(arch) {  
     ctx_build = true
 
     if(ctx_build) {
