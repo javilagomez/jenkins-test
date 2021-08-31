@@ -10,7 +10,7 @@ tasks['arm'] = { ->
         try {
             archFlow('arm')
         } catch(error) {
-            currentBuild.result = "FAILURE"
+            echo error.toString()
         }
     }
 }
@@ -65,10 +65,8 @@ def miniFlow(arch) {
         currentBuild.description = 'PR #8 - url'
     }
 
-    if (arch == "arm") {
-        stage('Build Environment') {
-            sh "echo error" m
-        }
+    stage('Build Environment') {
+        sh "echo error"
     }
 
     // Build docker image
