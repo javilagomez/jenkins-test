@@ -40,7 +40,7 @@ def archFlow(String arch) {
     stage('Download tooling') {
         sh "echo download tooling"
         FAILED_STAGE = env.STAGE_NAME
-        error "failed for some reason ${FAILED_STAGE}"
+        //error "failed for some reason ${FAILED_STAGE}"
     }
 
 
