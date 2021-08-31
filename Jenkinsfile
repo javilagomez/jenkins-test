@@ -37,7 +37,7 @@ def singleFlow(){
 def archFlow(String arch) {
     // Build context
     stage('Download tooling') {
-        sh "echo download tooling"
+        sh "echo download tooling" + m
     }
 
     // Clone repository
