@@ -1,4 +1,5 @@
 Map tasks = [failFast: false]
+FAILED_STAGE
 
 tasks['x86'] = { ->
     node('master') {
@@ -37,6 +38,7 @@ def singleFlow(){
 def archFlow(String arch) {
     // Build context
     stage('Download tooling') {
+        FAILED_STAGE=env.STAGE_NAME
         sh "echo download tooling" + m
     }
 
@@ -49,6 +51,12 @@ def archFlow(String arch) {
         miniFlow(arch)
     } else {
         sh 'echo Enter to else'
+    }
+
+    post {
+        failure {
+            echo "Failed stage name ${FAILED_STAGE}"
+        }
     }
 }
 
