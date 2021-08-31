@@ -39,7 +39,8 @@ def archFlow(String arch) {
     // Build context
     stage('Download tooling') {
         FAILED_STAGE=env.STAGE_NAME
-        sh "echo download tooling" + m
+        sh "echo download tooling"
+        error "failed for some reason."
     }
 
     // Clone repository
