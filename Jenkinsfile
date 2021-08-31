@@ -11,7 +11,7 @@ tasks['arm'] = { ->
         try {
             archFlow('arm')
         } catch(error) {
-            echo error.toString()
+            echo "Failed in stage ${FAILED_STAGE}"
         }
     }
 }
@@ -40,7 +40,7 @@ def archFlow(String arch) {
     stage('Download tooling') {
         sh "echo download tooling"
         FAILED_STAGE = env.STAGE_NAME
-        error "failed for some reason ${env.STAGE_NAME}"
+        error "failed for some reason ${FAILED_STAGE}"
     }
 
 
