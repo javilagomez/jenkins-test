@@ -1,5 +1,5 @@
 Map tasks = [failFast: false]
-FAILED_STAGE
+def FAILED_STAGE
 
 tasks['x86'] = { ->
     node('master') {
