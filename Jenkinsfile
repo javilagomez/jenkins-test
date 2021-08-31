@@ -37,14 +37,11 @@ def singleFlow(){
 
 def archFlow(String arch) {
     // Build context
-    try {
-        stage('Download tooling') {
-            sh "echo download tooling"
-            error "failed for some reason."
-        }
-    } catch(e) {
-        echo "Failed stage: ${STAGE_NAME}"
+    stage('Download tooling') {
+        sh "echo download tooling"
+        error "failed for some reason ${env.STAGE_NAME}"
     }
+
 
     // Clone repository
     stage('Checkout') {
