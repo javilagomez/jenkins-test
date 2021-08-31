@@ -37,10 +37,13 @@ def singleFlow(){
 
 def archFlow(String arch) {
     // Build context
-    stage('Download tooling') {
-        FAILED_STAGE=env.STAGE_NAME
-        sh "echo download tooling"
-        error "failed for some reason."
+    try {
+        stage('Download tooling') {
+            sh "echo download tooling"
+            error "failed for some reason."
+        }
+    } catch(e) {
+        echo "Failed stage: ${STAGE_NAME}"
     }
 
     // Clone repository
@@ -52,12 +55,6 @@ def archFlow(String arch) {
         miniFlow(arch)
     } else {
         sh 'echo Enter to else'
-    }
-
-    post {
-        failure {
-            echo "Failed stage name ${FAILED_STAGE}"
-        }
     }
 }
 
