@@ -3,11 +3,11 @@ def test = [:]
 test["a"] = {
     stage ("a") {
         stage ("ab") {
-            sh "echo ************************************************** \
-                ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL ** \
-                ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. ** \
-                link al anuncio \
-                **************************************************"
+            sh "**************************************************"
+            sh "** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL ** "
+            sh "** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. ** "
+            sh "link al anuncio "
+            sh "**************************************************"
         }
         stage ("xyz") {
             sh "echo stage xyz"
