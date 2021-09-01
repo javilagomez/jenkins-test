@@ -1,36 +1,4 @@
-def test = [:]
-
-test["a"] = {
-    stage ("a") {
-        stage ("ab") {
-            printf 'hola \n mundo'
-        }
-        stage ("xyz") {
-            sh "echo stage xyz"
-        }
-    }
-}
-
-test["b"] = {
-    stage ("b") {
-        stage ("bb") {
-            sh "echo stage bb"
-        }
-        stage ("bxz") {
-            sh "echo stagebxyz"
-        }
-    }
-}
-node {
-   //stage 'start'
-   parallel test
-   stage ('middle') {
-       sh "echo middle"
-   }
-   
-}
-
-/*Map tasks = [failFast: false]
+Map tasks = [failFast: false]
 def FAILED_STAGE
 
 tasks['x86'] = { ->
@@ -58,7 +26,7 @@ singleFlow()
 def singleFlow(){
     node('master') {
         stage('Melicov') {
-            sh "echo melicov"
+            printf "hola \n mundo"
         }
         
         stage('Publish') {
@@ -123,7 +91,7 @@ def miniFlow(arch) {
     }
 }
 
-// parallel task map
+/*/ parallel task map
 Map tasks = [failFast: false]
 
 tasks['x86'] = { ->
