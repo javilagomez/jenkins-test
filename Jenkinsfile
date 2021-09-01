@@ -11,7 +11,9 @@ tasks['arm'] = { ->
         try {
             archFlow('arm')
         } catch(error) {
-            echo "Failed in stage ${FAILED_STAGE}"
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                sh "exit 1"
+            }
         }
     }
 }
@@ -48,11 +50,6 @@ def archFlow(String arch) {
 
     // Clone repository
     stage('Checkout') {
-        if (arch == "arm") {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                sh "exit 1"
-            }
-        }
         sh  "echo todo tranqui"
     }
 
@@ -76,8 +73,10 @@ def miniFlow(arch) {
         currentBuild.description = 'PR #8 - url'
     }
 
-    stage('Build Environment') {
-        sh "echo error"
+    if(arch == "arm") {
+        stage('Build Environment') {
+            sh "echo error" + m
+        }
     }
 
     // Build docker image
