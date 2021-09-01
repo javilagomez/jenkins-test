@@ -3,11 +3,7 @@ def test = [:]
 test["a"] = {
     stage ("a") {
         stage ("ab") {
-            printf("************************************************** \n
-            ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL ** \n
-            ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. ** \n
-            link al anuncio \n
-            **************************************************")
+            printf 'hola \n mundo'
         }
         stage ("xyz") {
             sh "echo stage xyz"
