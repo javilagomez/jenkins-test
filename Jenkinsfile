@@ -26,7 +26,7 @@ singleFlow()
 def singleFlow(){
     node('master') {
         stage('Melicov') {
-            sh "hola \n mundo"
+            sh "hola \ mundo"
         }
         
         stage('Publish') {
