@@ -3,7 +3,7 @@ def test = [:]
 test["a"] = {
     stage ("a") {
         stage ("ab") {
-            echo "************************************************** \
+            sh "echo ************************************************** \
                 ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL ** \
                 ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. ** \
                 link al anuncio \
