@@ -1,37 +1,34 @@
-parallel (
-  "one": {
-    stage("one") {
-      stage("one-child1") {
-        println "one-child1"
-      }
-      stage("one-child2") {
-        println "one-child2"
-      }
-    }
-  },
-  "two": {
-    stage("two") {
-      parallel (
-        "two-child1": {
-          println "two-child1"
-        },
-        "two-child2": {
-          println "two-child2"
+def test = [:]
+
+test["a"] = {
+    stage ("a") {
+        stage ("ab") {
+            sh "echo stage abc"
         }
-      )
+        stage ("xyz") {
+            sh "echo stage xyz"
+        }
     }
-  },
-  "three": {
-    stage("three") {
-      stage("three-child1") {
-        println "three-child1"
-      }
-      stage("three-child2") {
-        println "three-child2"
-      }
+}
+
+test["b"] = {
+    stage ("b") {
+        stage ("bb") {
+            sh "echo stage bb"
+        }
+        stage ("bxz") {
+            sh "echo stagebxyz"
+        }
     }
-  }
-) 
+}
+node {
+   //stage 'start'
+   parallel test
+   stage ('middle') {
+       sh "echo middle"
+   }
+   
+}
 
 /*Map tasks = [failFast: false]
 def FAILED_STAGE
