@@ -14,7 +14,7 @@ parallel (
       parallel (
         "two-child1": {
           println "two-child1"
-        }
+        },
         "two-child2": {
           println "two-child2"
         }
