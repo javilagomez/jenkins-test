@@ -1,9 +1,3 @@
-import org.jenkinsci.plugins.pipeline.modeldefinition.actions.ExecutionModelAction
-import org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStages
-
-if (!currentBuild.rawBuild.getAction(ExecutionModelAction))
-    currentBuild.rawBuild.addAction(new ExecutionModelAction(new ModelASTStages(null)))
-
 parallel (
   "one": {
     stage("one") {
