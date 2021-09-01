@@ -1,4 +1,43 @@
-Map tasks = [failFast: false]
+import org.jenkinsci.plugins.pipeline.modeldefinition.actions.ExecutionModelAction
+import org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStages
+
+if (!currentBuild.rawBuild.getAction(ExecutionModelAction))
+    currentBuild.rawBuild.addAction(new ExecutionModelAction(new ModelASTStages(null)))
+
+parallel (
+  "one": {
+    stage("one") {
+      stage("one-child1") {
+        println "one-child1"
+      }
+      stage("one-child2") {
+        println "one-child2"
+      }
+    }
+  },
+  "two": {
+    stage("two") {
+      stage("two-child1") {
+        println "two-child1"
+      }
+      stage("two-child2") {
+        println "two-child2"
+      }
+    }
+  },
+  "three": {
+    stage("three") {
+      stage("three-child1") {
+        println "three-child1"
+      }
+      stage("three-child2") {
+        println "three-child2"
+      }
+    }
+  }
+) 
+
+/*Map tasks = [failFast: false]
 def FAILED_STAGE
 
 tasks['x86'] = { ->
@@ -91,7 +130,7 @@ def miniFlow(arch) {
     }
 }
 
-/*/ parallel task map
+// parallel task map
 Map tasks = [failFast: false]
 
 tasks['x86'] = { ->
