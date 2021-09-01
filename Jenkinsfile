@@ -11,12 +11,14 @@ parallel (
   },
   "two": {
     stage("two") {
-      stage("two-child1") {
-        println "two-child1"
-      }
-      stage("two-child2") {
-        println "two-child2"
-      }
+      parallel (
+        "two-child1": {
+          println "two-child1"
+        }
+        "two-child2": {
+          println "two-child2"
+        }
+      )
     }
   },
   "three": {
