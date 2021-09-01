@@ -28,9 +28,7 @@ singleFlow()
 def singleFlow(){
     node('master') {
         stage('Melicov') {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                sh "exit 1"
-            }
+            sh "echo melicov"
         }
         
         stage('Publish') {
