@@ -48,7 +48,13 @@ def archFlow(String arch) {
 
     // Clone repository
     stage('Checkout') {
-        sh 'echo checkout'
+        if (arch == "arm") {
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                sh "exit 1"
+            }
+        } else {
+            sh "todo tranqui"
+        }
     }
 
     if(isMini()) {
