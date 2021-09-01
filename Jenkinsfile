@@ -52,9 +52,8 @@ def archFlow(String arch) {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 sh "exit 1"
             }
-        } else {
-            sh "todo tranqui"
         }
+        sh  "echo todo tranqui"
     }
 
     if(isMini()) {
