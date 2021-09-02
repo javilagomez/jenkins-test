@@ -12,7 +12,7 @@ tasks['arm'] = { ->
             archFlow('arm')
         } catch(error) {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                sh "exit 1"
+                sh "exit 1 ${FAILED_STAGE}"
             }
         }
     }
