@@ -77,7 +77,6 @@ def miniFlow(arch) {
             sh "echo Build environment"
             //error "echo error"
             sh "echo hola ${currentBuild.result}"
-            sh "echo build bueno"
         }
     }
 
