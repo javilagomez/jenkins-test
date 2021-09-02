@@ -11,8 +11,8 @@ tasks['arm'] = { ->
         try {
             archFlow('arm')
         } catch(e) {
-            catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                        error '  ************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                error '  ************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
             }
         }
     }
@@ -82,13 +82,8 @@ def miniFlow(arch) {
 
     // Build docker image
     stage('Build Docker Image') {
-        /*
-        **************************************************
-** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL 
-** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW.
-** (link al anuncio)
-**************************************************
-        */
+        sh "echo build docker image"
+        sh "echo build ${arch}"
     }
 
     if(build_ok) {
