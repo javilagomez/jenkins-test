@@ -82,10 +82,7 @@ def miniFlow(arch) {
 
     // Build docker image
     stage('Build Docker Image') {
-        echo '********** \n 
-        ** hola ** \n 
-        ** como estás ** \n
-        ****************'
+        echo '********** \n ** hola ** \n ** como estás ** \n ****************'
     }
 
     if(build_ok) {
