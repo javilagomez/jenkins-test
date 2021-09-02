@@ -1,15 +1,16 @@
 Map tasks = [failFast: false]
 def FAILED_STAGE
+arm = "arm"
 
 tasks['x86'] = { ->
     node('master') {
         archFlow('x86')
     }
 }
-tasks['arm'] = { ->
+tasks['arms'] = { ->
     node('master') {
         try {
-            archFlow('arm')
+            archFlow('arms')
         } catch(e) {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 error '  ************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
@@ -83,7 +84,7 @@ def miniFlow(arch) {
     // Build docker image
     stage('Build Docker Image') {
         sh "echo build docker image"
-        sh "echo build ${arch}"
+        sh "echo build ${arch.equals("arm")}"
     }
 
     if(build_ok) {
