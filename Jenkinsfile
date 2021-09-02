@@ -10,9 +10,9 @@ tasks['arm'] = { ->
     node('master') {
         try {
             archFlow('arm')
-        } catch(error) {
+        } catch(e) {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                sh "exit 1 ${FAILED_STAGE}"
+                error "exit 1 ${FAILED_STAGE}"
             }
         }
     }
@@ -75,7 +75,7 @@ def miniFlow(arch) {
         stage('Build Environment') {
             FAILED_STAGE = env.STAGE_NAME
             sh "echo Build environment"
-            error "echo error"
+            sh "echo error" + m
             sh "build bueno"
         }
     }
