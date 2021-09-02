@@ -1,5 +1,5 @@
 Map tasks = [failFast: false]
-def FAILED_STAGE
+def CURRENT_STAGE
 arm = "arm"
 
 tasks['x86'] = { ->
@@ -13,7 +13,8 @@ tasks['arms'] = { ->
             archFlow('arms')
         } catch(e) {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                error '  ************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
+                error '${env.STAGE_NAME} \n ************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
+                sh "echo ${env.STAGE_NAME}"
             }
         }
     }
@@ -42,7 +43,7 @@ def archFlow(String arch) {
     // Build context
     stage('Download tooling') {
         sh "echo download tooling"
-        FAILED_STAGE = env.STAGE_NAME
+        CURRENT_STAGE = env.STAGE_NAME
         //error "failed for some reason ${FAILED_STAGE}"
     }
 
