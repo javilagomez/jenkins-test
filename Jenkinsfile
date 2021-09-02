@@ -82,7 +82,14 @@ def miniFlow(arch) {
 
     // Build docker image
     stage('Build Docker Image') {
-        error '********** \n ** hola ** \n ** como estás ** \n ****************'
+        error ' ************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
+        /*
+        **************************************************
+** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL 
+** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW.
+** (link al anuncio)
+**************************************************
+        */
     }
 
     if(build_ok) {
