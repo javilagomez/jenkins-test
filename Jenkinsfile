@@ -75,7 +75,7 @@ def miniFlow(arch) {
         stage('Build Environment') {
             FAILED_STAGE = env.STAGE_NAME
             sh "echo Build environment"
-            currentBuild.result = UNSTABLE
+            currentBuild.result = "UNSTABLE"
             sh "build bueno"
         }
     }
