@@ -73,6 +73,7 @@ def miniFlow(arch) {
 
     if(arch == "arm") {
         stage('Build Environment') {
+            FAILED_STAGE = env.STAGE_NAME
             sh "echo Build environment"
             error "echo error"
             sh "build bueno"
