@@ -82,7 +82,9 @@ def miniFlow(arch) {
 
     // Build docker image
     stage('Build Docker Image') {
-        sh 'echo build docker image'
+        sh 'echo build docker image \n
+        build docker otro image \n
+        hola adios'
     }
 
     if(build_ok) {
