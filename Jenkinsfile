@@ -76,8 +76,8 @@ def miniFlow(arch) {
             FAILED_STAGE = env.STAGE_NAME
             sh "echo Build environment"
             //error "echo error"
-            sh "echo ${currentBuild.result}"
-            sh "build bueno"
+            sh "echo hola ${currentBuild.result}"
+            sh "echo build bueno"
         }
     }
 
