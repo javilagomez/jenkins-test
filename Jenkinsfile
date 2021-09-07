@@ -6,8 +6,7 @@
 }*/
 
 Map tasks = [failFast: false]
-def CURRENT_STAGE
-arm = "arm"
+CURRENT_STAGE
 
 tasks['x86'] = { ->
     node('master') {
