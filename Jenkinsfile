@@ -1,4 +1,10 @@
-Map tasks = [failFast: false]
+node('master') {
+    stage('env variables') {
+        sh 'printenv'
+    }
+}
+
+/*Map tasks = [failFast: false]
 def CURRENT_STAGE
 arm = "arm"
 
@@ -43,8 +49,6 @@ def archFlow(String arch) {
     // Build context
     stage('Download tooling') {
         sh "echo download tooling"
-        CURRENT_STAGE = env.STAGE_NAME
-        error "failed for some reason ${CURRENT_STAGE}"
     }
 
 
@@ -99,7 +103,7 @@ def miniFlow(arch) {
     stage('publish result') {
         sh "echo pipeline: ${build_ok}"
     }
-}
+}*/
 
 /*/ parallel task map
 Map tasks = [failFast: false]
