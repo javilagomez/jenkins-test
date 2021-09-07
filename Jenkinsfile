@@ -20,7 +20,7 @@ tasks['arm'] = { ->
             archFlow('arm')
         } catch(e) {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                error '************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
+                sh 'echo ************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
                 sh "echo ${STAGE_NAME} - ${BUILD_URL}"
             }
         }
