@@ -1,11 +1,11 @@
-node('master') {
+/*node('master') {
     stage('env variables') {
         sh 'printenv'
         sh "echo ${BUILD_URL}, ${STAGE_NAME}, ${BUILD_ID}"
     }
-}
+}*/
 
-/*Map tasks = [failFast: false]
+Map tasks = [failFast: false]
 def CURRENT_STAGE
 arm = "arm"
 
@@ -21,8 +21,8 @@ tasks['arms'] = { ->
         } catch(e) {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 error '************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
+                sh "echo ${STAGE_NAME} - ${BUILD_URL}"
             }
-            sh "echo ${STAGE_NAME}"
         }
     }
 }
@@ -82,8 +82,7 @@ def miniFlow(arch) {
         stage('Build Environment') {
             FAILED_STAGE = env.STAGE_NAME
             sh "echo Build environment"
-            //error "echo error"
-            sh "echo hola ${currentBuild.result}"
+            error "echo error"
         }
     }
 
@@ -104,7 +103,7 @@ def miniFlow(arch) {
     stage('publish result') {
         sh "echo pipeline: ${build_ok}"
     }
-}*/
+}
 
 /*/ parallel task map
 Map tasks = [failFast: false]
