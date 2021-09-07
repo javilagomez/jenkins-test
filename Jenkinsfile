@@ -41,6 +41,7 @@ def singleFlow(){
         }
         
         stage('Publish') {
+            currentStage = STAGE_NAME
             sh "echo publish"
         }
     }
@@ -49,12 +50,14 @@ def singleFlow(){
 def archFlow(String arch) {
     // Build context
     stage('Download tooling') {
+        currentStage = STAGE_NAME
         sh "echo download tooling"
     }
 
 
     // Clone repository
     stage('Checkout') {
+        currentStage = STAGE_NAME
         sh  "echo todo tranqui"
     }
 
@@ -88,20 +91,14 @@ def miniFlow(arch) {
 
     // Build docker image
     stage('Build Docker Image') {
+        currentStage = STAGE_NAME
         sh "echo build docker image"
         sh "echo build ${arch.equals("arm")}"
     }
 
-    if(build_ok) {
-        if(build_ok) {
-            currentBuild.result = "SUCCESS"
-        } else {
-            currentBuild.result = "FAILURE"
-        }
-    }
-
     stage('publish result') {
         sh "echo pipeline: ${build_ok}"
+        currentStage = STAGE_NAME
     }
 }
 
