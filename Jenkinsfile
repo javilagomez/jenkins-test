@@ -1,6 +1,7 @@
 node('master') {
     stage('env variables') {
         sh 'printenv'
+        sh "echo ${BUILD_URL}, ${STAGE_NAME}, ${BUILD_ID}"
     }
 }
 
@@ -21,7 +22,7 @@ tasks['arms'] = { ->
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 error '************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
             }
-            sh "echo ${env.STAGE_NAME}"
+            sh "echo ${STAGE_NAME}"
         }
     }
 }
