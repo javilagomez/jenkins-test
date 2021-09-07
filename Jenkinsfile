@@ -6,7 +6,7 @@
 }*/
 
 Map tasks = [failFast: false]
-currentStage
+currentStage = null
 
 tasks['x86'] = { ->
     node('master') {
