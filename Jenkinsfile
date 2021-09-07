@@ -21,7 +21,7 @@ tasks['arm'] = { ->
         } catch(e) {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 //sh 'echo ************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
-                sh "echo ${STAGE_NAME} - ${BUILD_URL}"
+                error "${STAGE_NAME}, ${BUILD_URL}"
             }
         }
     }
@@ -80,7 +80,6 @@ def miniFlow(arch) {
 
     if(arch == "arm") {
         stage('Build Environment') {
-            FAILED_STAGE = env.STAGE_NAME
             sh "echo Build environment"
             error "echo error"
         }
