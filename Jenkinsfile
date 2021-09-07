@@ -6,7 +6,7 @@
 }*/
 
 Map tasks = [failFast: false]
-CURRENT_STAGE
+currentStage
 
 tasks['x86'] = { ->
     node('master') {
@@ -18,7 +18,7 @@ tasks['arm'] = { ->
         try {
             archFlow('arm')
         } catch(e) {
-            sh "echo ${CURRENT_STAGE}, ${BUILD_URL}"
+            sh "echo ${currentStage}, ${BUILD_URL}"
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 error '************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
             }
@@ -36,7 +36,7 @@ singleFlow()
 def singleFlow(){
     node('master') {
         stage('Melicov') {
-            CURRENT_STAGE = STAGE_NAME
+            currentStage = STAGE_NAME
             sh "echo melicov"
         }
         
@@ -80,7 +80,7 @@ def miniFlow(arch) {
 
     if(arch == "arm") {
         stage('Build Environment') {
-            CURRENT_STAGE = STAGE_NAME
+            currentStage = STAGE_NAME
             sh "echo Build environment"
             error "echo error"
         }
