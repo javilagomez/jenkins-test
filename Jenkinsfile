@@ -1,6 +1,6 @@
 node('master') {
     stage('env variables') {
-        def response = httpRequest 'http://localhost:8080/jenkins/api/json?pretty=true'
+        def response = httpRequest 'https://jsonplaceholder.typicode.com/posts/1/comments'
         println("Status: "+response.status)
         println("Content: "+response.content)
     }
