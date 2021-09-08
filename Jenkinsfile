@@ -19,7 +19,7 @@ tasks['arm'] = { ->
             archFlow('arm')
         } catch(e) {
             sh "echo ${currentStage}, ${BUILD_URL}"
-            def response = httpRequest 'http://localhost:8080/jenkins/api/json?pretty=true'
+            def response = httpRequest 'http://localhost:8080'
             sh "echo Status: ${response.status}"
             sh "echo Content: ${response.content}"
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
