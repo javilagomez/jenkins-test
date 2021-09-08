@@ -19,10 +19,10 @@ tasks['arm'] = { ->
             archFlow('arm')
         } catch(e) {
             sh "echo ${currentStage}, ${BUILD_URL}"
+            def response = httpRequest 'http://localhost:8080/jenkins/api/json?pretty=true'
+            sh "echo Status: ${response.status}"
+            sh "echo Content: ${response.content}"
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                def response = httpRequest 'http://localhost:8080/jenkins/api/json?pretty=true'
-                sh "echo Status: ${response.status}"
-                sh "echo Content: ${response.content}"
                 error '************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
             }
         }
