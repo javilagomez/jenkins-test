@@ -1,9 +1,5 @@
-node('master') {
+/*node('master') {
     stage('env variables') {
-        //def response = httpRequest 'https://jsonplaceholder.typicode.com/posts/1/comments'
-        /*def response = httpRequest 'https://production_rp-ci-proxy.furyapps.io/pipeline/multiarchSuccess/3000'
-        println("Status: "+response.status)
-        println("Content: "+response.content)*/
         // GET
         final String url = "--location --request GET 'https://production_rp-ci-proxy.furyapps.io/pipeline/3221366' --header 'x-auth-token: d928d89f40e23e4f508fe60fe3f7419090321841a39de902ee09b9cba47fc7ed'"
         final String response = sh(script: "curl -s $url", returnStdout: true).trim()
@@ -13,9 +9,9 @@ node('master') {
             error '  ************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
         }
     }
-}
+}*/
 
-/*Map tasks = [failFast: false]
+Map tasks = [failFast: false]
 currentStage = null
 
 tasks['x86'] = { ->
@@ -29,6 +25,11 @@ tasks['arm'] = { ->
             archFlow('arm')
         } catch(e) {
             sh "echo ${currentStage}, ${BUILD_URL}"
+
+            final String url = "--location --request GET 'https://production_rp-ci-proxy.furyapps.io/pipeline/3221366' --header 'x-auth-token: d928d89f40e23e4f508fe60fe3f7419090321841a39de902ee09b9cba47fc7ed'"
+            final String response = sh(script: "curl -s $url", returnStdout: true).trim()
+            echo response
+
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 error '************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
             }
@@ -111,7 +112,7 @@ def miniFlow(arch) {
         sh "echo pipeline: ${build_ok}"
         currentStage = STAGE_NAME
     }
-}*/
+}
 
 /*/ parallel task map
 Map tasks = [failFast: false]
