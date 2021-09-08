@@ -1,11 +1,12 @@
-/*node('master') {
+node('master') {
     stage('env variables') {
-        sh 'printenv'
-        sh "echo ${BUILD_URL}, ${STAGE_NAME}, ${BUILD_ID}"
+        def response = httpRequest 'http://localhost:8080/jenkins/api/json?pretty=true'
+        println("Status: "+response.status)
+        println("Content: "+response.content)
     }
-}*/
+}
 
-Map tasks = [failFast: false]
+/*Map tasks = [failFast: false]
 currentStage = null
 
 tasks['x86'] = { ->
@@ -101,7 +102,7 @@ def miniFlow(arch) {
         sh "echo pipeline: ${build_ok}"
         currentStage = STAGE_NAME
     }
-}
+}*/
 
 /*/ parallel task map
 Map tasks = [failFast: false]
