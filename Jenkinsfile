@@ -21,8 +21,8 @@ tasks['arm'] = { ->
             sh "echo ${currentStage}, ${BUILD_URL}"
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 def response = httpRequest 'http://localhost:8080/jenkins/api/json?pretty=true'
-                println("Status: "+response.status)
-                println("Content: "+response.content)
+                sh "echo Status: ${response.status}"
+                sh "echo Content: ${response.content}"
                 error '************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
             }
         }
