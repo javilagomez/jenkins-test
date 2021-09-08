@@ -19,7 +19,6 @@ tasks['arm'] = { ->
             archFlow('arm')
         } catch(e) {
             sh "echo ${currentStage}, ${BUILD_URL}"
-            def response = httpRequest 'https://jsonplaceholder.typicode.com/posts/1/comments'
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 error '************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
             }
@@ -39,6 +38,7 @@ def singleFlow(){
         stage('Melicov') {
             currentStage = STAGE_NAME
             sh "echo melicov"
+            def response = httpRequest 'https://jsonplaceholder.typicode.com/posts/1/comments'
         }
         
         stage('Publish') {
