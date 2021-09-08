@@ -1,9 +1,16 @@
 node('master') {
     stage('env variables') {
         //def response = httpRequest 'https://jsonplaceholder.typicode.com/posts/1/comments'
-        def response = httpRequest 'https://production_rp-ci-proxy.furyapps.io/pipeline/multiarchSuccess/3000'
+        /*def response = httpRequest 'https://production_rp-ci-proxy.furyapps.io/pipeline/multiarchSuccess/3000'
         println("Status: "+response.status)
-        println("Content: "+response.content)
+        println("Content: "+response.content)*/
+        // GET
+        def get = new URL("https://jsonplaceholder.typicode.com/posts/1/comments").openConnection();
+        def getRC = get.getResponseCode();
+        sh "echo hola ${getRC}"
+        if(getRC.equals(200)) {
+            sh "echo adios ${get.getInputStream().getText()}"
+        }
     }
 }
 
