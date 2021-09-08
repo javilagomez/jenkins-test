@@ -5,12 +5,9 @@ node('master') {
         println("Status: "+response.status)
         println("Content: "+response.content)*/
         // GET
-        def get = new URL("https://jsonplaceholder.typicode.com/posts/1/comments").openConnection();
-        def getRC = get.getResponseCode();
-        sh "echo hola ${getRC}"
-        if(getRC.equals(200)) {
-            sh "echo adios ${get.getInputStream().getText()}"
-        }
+        final String url = "https://jsonplaceholder.typicode.com/posts/1/comments"
+        final String response = sh(script: "curl -s $url", returnStdout: true).trim()
+        echo response
     }
 }
 
