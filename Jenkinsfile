@@ -1,6 +1,7 @@
 node('master') {
     stage('env variables') {
-        def response = httpRequest 'https://jsonplaceholder.typicode.com/posts/1/comments'
+        //def response = httpRequest 'https://jsonplaceholder.typicode.com/posts/1/comments'
+        def response = httpRequest 'https://production_rp-ci-proxy.furyapps.io/pipeline/multiarchSuccess/3000'
         println("Status: "+response.status)
         println("Content: "+response.content)
     }
