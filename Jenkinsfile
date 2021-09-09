@@ -49,7 +49,6 @@ def singleFlow(){
         stage('Melicov') {
             currentStage = STAGE_NAME
             sh "echo melicov"
-            def response = httpRequest 'https://jsonplaceholder.typicode.com/posts/1/comments'
         }
         
         stage('Publish') {
