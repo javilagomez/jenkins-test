@@ -26,7 +26,7 @@ tasks['arm'] = { ->
         } catch(e) {
             sh "echo ${currentStage}, ${BUILD_URL}"
 
-            final String url = "curl -s --location --request GET 'http://production.rp-ci-proxy.melifrontends.com/pipeline/3221366'"
+            final String url = "curl -s --location --request GET 'http://test.rp-ci-proxy.melifrontends.com/pipeline/3221366'"
             final String response = sh(script: url, returnStdout: true).trim()
             echo response
 
