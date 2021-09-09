@@ -26,9 +26,9 @@ tasks['arm'] = { ->
         } catch(e) {
             sh "echo ${currentStage}, ${BUILD_URL}"
 
-            final String url = "--request GET 'https://production_rp-ci-proxy.furyapps.io/pipeline/3221366' --header 'x-auth-token: ac3220d5f080ece307978add4d1617156f95aaf37de68546dc6e2589a26e31a6'"
-            final String response = sh(script: "curl ${url}", returnStdout: true).trim()
-            echo response
+            final String url = 'curl https://production_rp-ci-proxy.furyapps.io/pipeline/3221366'
+            //final String response = sh(script: "curl ${url}", returnStdout: true).trim()
+            echo url
 
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 error '************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
