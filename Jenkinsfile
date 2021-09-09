@@ -26,7 +26,7 @@ tasks['arm'] = { ->
         } catch(e) {
             sh "echo ${currentStage}, ${BUILD_URL}"
 
-            final String url = "curl -s --location --request GET 'https://production_rp-ci-proxy.furyapps.io/pipeline/3221366' --header 'x-auth-token: ac3220d5f080ece307978add4d1617156f95aaf37de68546dc6e2589a26e31a6'"
+            final String url = "curl -s --location --request GET 'http://stage.rp-ci-proxy.melifrontends.com/pipeline/3221366' --header 'x-auth-token: ac3220d5f080ece307978add4d1617156f95aaf37de68546dc6e2589a26e31a6'"
             final String response = sh(script: url, returnStdout: true).trim()
             echo response
 
