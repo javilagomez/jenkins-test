@@ -13,6 +13,7 @@
 
 Map tasks = [failFast: false]
 currentStage = null
+armState = "SUCCESS"
 
 tasks['x86'] = { ->
     node('master') {
@@ -24,7 +25,8 @@ tasks['arm'] = { ->
         try {
             archFlow('arm')
         } catch(e) {
-            sh "echo ${currentStage}, ${BUILD_URL}"
+            armState = "FAILURE"
+            sh "echo ${currentStage}, ${armState}"
 
             final String url = "curl -s --location --request GET 'http://test.rp-ci-proxy.melifrontends.com/pipeline/3000' --header 'x-auth-token: 5d7d1575a03df197cc8fd50e80b6d85a2e5c8a68d2b7e2e9d8ff9903f5ef9e50'"
             final String response = sh(script: url, returnStdout: true).trim()
