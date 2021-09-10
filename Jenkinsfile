@@ -28,6 +28,8 @@ tasks['arm'] = { ->
             armState = "FAILURE"
             sh "echo ${currentStage}, ${armState}, ${e.getMessage()}"
 
+            pipelineError('arm', e)
+
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 error '************************************************** \n ** IMPORTANT: THIS FAILURE DOES NOT BLOCK THE NORMAL \n ** FLOW OF THE PIPELINE AND CAN BE SAFELY INGNORED BY NOW. \n ** link al anuncio \n **************************************************'
             }
@@ -41,9 +43,10 @@ build_ok = true
 parallel(tasks)
 singleFlow()
 
-def pipelineError(String arch) {
+def pipelineError(String arch, error) {
     final String url = "curl -s --location --request GET 'http://test.rp-ci-proxy.melifrontends.com/pipeline/arm_state/3000' --header 'x-auth-token: 5d7d1575a03df197cc8fd50e80b6d85a2e5c8a68d2b7e2e9d8ff9903f5ef9e50'"
     final String response = sh(script: url, returnStdout: true).trim()
+    sh "echo ${error}"
     echo response
 }
 
