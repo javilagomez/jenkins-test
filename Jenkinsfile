@@ -12,6 +12,6 @@ node {
     }
 
     stage('Download tooling') {
-        checkout-stage()
+        download()
     }
 }
