@@ -14,7 +14,7 @@ def call(tech) {
         }
     }
 
-    if (tech == "node") {
+    if (tech == "nodejs") {
         stage('Build') {
             sh "echo build node"
         }
