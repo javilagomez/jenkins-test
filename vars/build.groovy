@@ -2,6 +2,6 @@
 
 def call() {
     GroovyShell shell = new GroovyShell()
-    def Util = shell.parse(new File('vars/web/buildWeb.groovy'))
+    def Util = shell.parse(new File('web/buildWeb.groovy'))
     Util
 }
