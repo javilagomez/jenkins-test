@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
 
 def call() {
-    hello = "Hello world 2!"
+    return "Hello world 2!"
 }
