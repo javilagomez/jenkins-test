@@ -12,7 +12,7 @@ node {
     }
 
     stage('Download tooling') {
-        sh "echo ${download()}"
+        sh "echo hello download tooling"
     }
 
     build()
