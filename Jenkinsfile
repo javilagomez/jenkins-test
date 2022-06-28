@@ -9,6 +9,9 @@ def checkout(hello) {
 node {
     stage('Checkout') {
         checkout(hello)
+    }
+
+    stage('Download tooling') {
         checkout-stage()
     }
 }
