@@ -12,6 +12,6 @@ node {
     }
 
     stage('Download tooling') {
-        download()
+        sh "echo ${download()}"
     }
 }
