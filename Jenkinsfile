@@ -1,3 +1,5 @@
+@Library('pipeline-library')
+
 hello = "hello world!"
 
 def checkout(hello) {
@@ -7,5 +9,6 @@ def checkout(hello) {
 node {
     stage('Checkout') {
         checkout(hello)
+        checkout-stage()
     }
 }
