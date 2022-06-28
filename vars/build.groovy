@@ -1,5 +1,6 @@
-import static web.buildWeb as hello
+#!/usr/bin/env groovy
 
+groovy -cp . web/buildWeb.groovy
 def call() {
     hello()
 }
