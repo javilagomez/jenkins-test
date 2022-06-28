@@ -2,4 +2,6 @@
 
 import static web.buildWeb as hello
 
-hello()
+def call() {
+    hello()
+}
