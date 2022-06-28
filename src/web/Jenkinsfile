@@ -2,13 +2,13 @@
 
 tech = "nodejs"
 
-def checkout(hello) {
-    sh "echo ${hello}"
+def checkout() {
+    sh "echo checkout"
 }
 
 node {
     stage('Checkout') {
-        checkout(hello)
+        checkout()
     }
 
     download()
