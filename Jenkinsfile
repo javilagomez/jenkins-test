@@ -16,4 +16,6 @@ node {
     }
 
     build()
+
+    buildEnvironment()
 }
