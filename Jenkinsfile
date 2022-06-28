@@ -14,4 +14,6 @@ node {
     stage('Download tooling') {
         sh "echo ${download()}"
     }
+
+    build()
 }
