@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def buildWeb() {
+def call() {
     stage('Build') {
         sh "echo build"
     }
