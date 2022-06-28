@@ -8,5 +8,5 @@ node {
 
     build(tech)
 
-    intallDependencies(tech)
+    installDependencies(tech)
 }
