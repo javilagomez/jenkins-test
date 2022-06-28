@@ -7,5 +7,7 @@ def checkout(hello) {
 }
 
 node {
-    checkout()
+    stage('Checkout') {
+        checkout(hello)
+    }
 }
