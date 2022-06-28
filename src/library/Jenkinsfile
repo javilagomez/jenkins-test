@@ -1,0 +1,12 @@
+@Library('pipeline-library')
+
+tech = "nodejs"
+
+node {
+
+    download(tech)
+
+    build(tech)
+
+    intallDependencies(tech)
+}
