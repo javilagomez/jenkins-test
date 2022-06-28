@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def call() {
+def call(tech) {
 
     if (tech == "java") {
         stage('Build') {
