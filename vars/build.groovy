@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
 
 def call() {
-    evaluate(new File("vars/web/buildWeb.groovy"))
+    evaluate(new File("../vars/web/buildWeb.groovy"))
 }
