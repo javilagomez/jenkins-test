@@ -15,5 +15,5 @@ node {
         sh "echo hello download tooling"
     }
 
-    build()
+    build("java")
 }

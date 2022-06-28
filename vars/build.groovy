@@ -1,5 +1,16 @@
 #!/usr/bin/env groovy
 
 def call() {
-    buildWeb()
+
+    if (tech == "java") {
+        stage('Build') {
+            sh "echo build java"
+        }
+    }
+
+    if (tech == "go") {
+        stage('Build') {
+            sh "echo build go"
+        }
+    }
 }
