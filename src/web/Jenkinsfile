@@ -1,6 +1,6 @@
 @Library('pipeline-library')
 
-hello = "hello world!"
+tech = "nodejs"
 
 def checkout(hello) {
     sh "echo ${hello}"
@@ -11,9 +11,7 @@ node {
         checkout(hello)
     }
 
-    stage('Download tooling') {
-        sh "echo hello download tooling"
-    }
+    download()
 
-    build("node")
+    build(tech)
 }
