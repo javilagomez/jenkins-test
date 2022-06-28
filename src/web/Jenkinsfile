@@ -1,11 +1,11 @@
 @Library('pipeline-library')
 
+tech = "nodejs"
+
 node {
-    tech = "nodejs"
+    checkout(tech)
 
-    checkout()
-
-    download()
+    download(tech)
 
     build(tech)
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
-def call() {
+def call(tech) {
     stage('Checkout') {
-        sh "echo hello checkout"
+        sh "echo hello checkout ${tech}"
     }
 }

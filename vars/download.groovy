@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
-def call() {
+def call(tech) {
     stage('Download tooling') {
-        sh "echo hello download tooling"
+        sh "echo hello download ${tech}"
     }
 }
