@@ -7,4 +7,16 @@ def call(tech) {
             sh "echo build java"
         }
     }
+
+    if (tech == "go") {
+        stage('Build') {
+            sh "echo build go"
+        }
+    }
+
+    if (tech == "node") {
+        stage('Build') {
+            sh "echo build node"
+        }
+    }
 }
