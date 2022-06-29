@@ -2,7 +2,7 @@
 
 Map tasks = [failFast: false]
 
-configuration = ["checkout", "download_tooling", "build"]
+configuration = ["checkout", "download_tooling"]
 
 tasks['x86'] = { ->
     node {
