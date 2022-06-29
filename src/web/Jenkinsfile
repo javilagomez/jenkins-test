@@ -27,7 +27,7 @@ def multiArchFlow(String arch) {
     }
 
     stage('checkout') {
-        if (STAGE_NAME == 'checkout') {
+        if (STAGE_NAME == "checkout") {
             checkout(tech)
         }
          sh "echo ${STAGE_NAME}"
