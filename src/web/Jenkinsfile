@@ -20,6 +20,15 @@ def multiArchFlow(String arch) {
 
     tech = "nodejs"
 
+    parallel(
+        "test": {
+            sh "echo test"
+        },
+        "linter": {
+            sh "echo linter"
+        }
+    )
+
     checkout(tech)
     
     downloadTooling(tech)
