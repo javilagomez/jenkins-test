@@ -28,7 +28,7 @@ def multiArchFlow(String arch, configuration) {
         sh "echo ${configuration}"
     }
 
-    checkout(tech),
+    checkout(tech)
     
     downloadTooling(tech)
 
