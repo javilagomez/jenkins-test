@@ -1,11 +1,26 @@
 @Library('pipeline-library')
 
+Map tasks = [failFast: false]
+
 tech = "nodejs"
 
-node {
-    checkout(tech)
+tasks["${LABEL_ARCH_X86}"] = { ->
+    node() {
+        multiArchFlow("${LABEL_ARCH_X86}")
+    }
+}
+tasks["${LABEL_ARCH_ARM}"] = { ->
+    node() {
+        multiArchFlow("${LABEL_ARCH_ARM}")
+    }
+}
 
-    downloadTooling(tech)
+def multiArchFlow() {
+    node {
+        checkout(tech)
+        
+        downloadTooling(tech)
 
-    build(tech)
+        build(tech)
+    }
 }
