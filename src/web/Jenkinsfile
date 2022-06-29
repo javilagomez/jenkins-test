@@ -5,12 +5,12 @@ Map tasks = [failFast: false]
 tech = "nodejs"
 
 tasks['x86'] = { ->
-    node('master') {
+    node {
         multiArchFlow('x86')
     }
 }
 tasks['arm'] = { ->
-    node('master') {
+    node {
         multiArchFlow('arm')
     }
 }
