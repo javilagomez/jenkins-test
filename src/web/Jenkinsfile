@@ -2,7 +2,7 @@
 
 Map tasks = [failFast: false]
 
-configuration = ["checkout", "download_tooling"]
+
 
 tasks['x86'] = { ->
     node {
@@ -18,6 +18,8 @@ tasks['arm'] = { ->
 // Run both task in parallel
 parallel(tasks)
 
+configuration = ["checkout", "download_tooling"]
+
 def multiArchFlow(String arch) {
 
     tech = "nodejs"
@@ -27,10 +29,7 @@ def multiArchFlow(String arch) {
     }
 
     if (configuration.contains("checkout")) {
-        stage('checkout') {
-            checkout(tech)
-            sh "echo ${STAGE_NAME}"
-        }
+        checkout(tech)
     }
     
     if (configuration.contains("download_tooling")) {
