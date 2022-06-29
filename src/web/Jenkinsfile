@@ -20,7 +20,7 @@ def multiArchFlow(String arch) {
 
     tech = "nodejs"
 
-    parallel(
+    parallel(arch) (
         "test": {
             sh "echo test"
         },
