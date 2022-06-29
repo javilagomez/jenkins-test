@@ -1,6 +1,6 @@
 @Library('pipeline-library')
 
-Map tasks = [failFast: false]
+/*Map tasks = [failFast: false]
 
 tasks['x86'] = { ->
     node {
@@ -11,6 +11,10 @@ tasks['arm'] = { ->
     node {
         multiArchFlow('arm')
     }
+}*/
+
+node {
+    multiArchFlow('arm')
 }
 
 // Run both task in parallel
@@ -20,7 +24,7 @@ def multiArchFlow(String arch) {
 
     tech = "nodejs"
 
-    parallel(arch) (
+    parallel (
         "test": {
             sh "echo test"
         },
@@ -29,9 +33,11 @@ def multiArchFlow(String arch) {
         }
     )
 
-    checkout(tech)
+    parallel (
+        checkout(tech),
     
-    downloadTooling(tech)
+        downloadTooling(tech)
+    )
 
     build(tech)
 }
