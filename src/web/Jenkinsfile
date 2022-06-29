@@ -2,7 +2,7 @@
 
 Map tasks = [failFast: false]
 
-configuration = ["checkout", "download_tooling"]
+configuration = ["checkout", "download_tooling", "build"]
 
 tasks['x86'] = { ->
     node {
@@ -26,14 +26,18 @@ def multiArchFlow(String arch) {
         sh "echo ${configuration}"
     }
 
-    if (configuration.contains("build")) {
+    if (configuration.contains("checkout")) {
         stage('checkout') {
             checkout(tech)
             sh "echo ${STAGE_NAME}"
         }
     }
     
-    downloadTooling(tech)
+    if (configuration.contains("download_tooling")) {
+        downloadTooling(tech)
+    }
 
-    build(tech)
+    if (configuration.contains("build")) {
+        build(tech)
+    }
 }
