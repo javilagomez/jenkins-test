@@ -18,14 +18,6 @@ parallel(tasks)
 
 def multiArchFlow(String arch) {
 
-    stage('Download tooling') {
-        currentStage = STAGE_NAME
-        sh "echo download tooling"
-    }
-}
-
-/*def multiArchFlow(String arch) {
-
     tech = "nodejs"
 
     checkout(tech)
@@ -33,4 +25,4 @@ def multiArchFlow(String arch) {
     downloadTooling(tech)
 
     build(tech)
-}*/
+}
