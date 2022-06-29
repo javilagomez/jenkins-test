@@ -4,7 +4,7 @@ tech = "nodejs"
 
 node {
 
-    download(tech)
+    downloadTooling(tech)
 
     build(tech)
 
