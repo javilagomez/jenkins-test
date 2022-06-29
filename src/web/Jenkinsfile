@@ -1,8 +1,5 @@
 @Library('pipeline-library')
-
-Map tasks = [failFast: false]
-
-tech = "nodejs"
+/*Map tasks = [failFast: false]
 
 tasks['x86'] = { ->
     node {
@@ -13,6 +10,12 @@ tasks['arm'] = { ->
     node {
         multiArchFlow('arm')
     }
+}*/
+
+tech = "nodejs"
+
+node {
+    multiArchFlow('arm')
 }
 
 def multiArchFlow(String arch) {
