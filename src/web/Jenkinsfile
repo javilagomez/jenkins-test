@@ -26,8 +26,11 @@ def multiArchFlow(String arch) {
         sh "echo ${configuration}"
     }
 
-    stage('checkout') {
-        checkout(tech)
+    sh "echo ${STAGE_NAME}"
+    if (STAGE_NAME == 'checkout') {
+        stage('checkout') {
+            checkout(tech)
+        }
     }
     
     downloadTooling(tech)
