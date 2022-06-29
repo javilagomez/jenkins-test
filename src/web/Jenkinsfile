@@ -4,23 +4,21 @@ Map tasks = [failFast: false]
 
 tech = "nodejs"
 
-tasks["${LABEL_ARCH_X86}"] = { ->
-    node() {
-        multiArchFlow("${LABEL_ARCH_X86}")
+tasks['x86'] = { ->
+    node('master') {
+        multiArchFlow('x86')
     }
 }
-tasks["${LABEL_ARCH_ARM}"] = { ->
-    node() {
-        multiArchFlow("${LABEL_ARCH_ARM}")
+tasks['arm'] = { ->
+    node('master') {
+        multiArchFlow('arm')
     }
 }
 
-def multiArchFlow() {
-    node {
-        checkout(tech)
-        
-        downloadTooling(tech)
+def multiArchFlow(String arch) {
+    checkout(tech)
+    
+    downloadTooling(tech)
 
-        build(tech)
-    }
+    build(tech)
 }
