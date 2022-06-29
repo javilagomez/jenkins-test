@@ -13,6 +13,9 @@ tasks['arm'] = { ->
     }
 }
 
+// Run both task in parallel
+parallel(tasks)
+
 def multiArchFlow(String arch) {
 
     stage('Download tooling') {
