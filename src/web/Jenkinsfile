@@ -2,10 +2,6 @@
 
 Map tasks = [failFast: false]
 
-def configuration = [
-    "checkout", "download_tooling"
-]
-
 tasks['x86'] = { ->
     node {
         multiArchFlow('x86')
@@ -20,13 +16,9 @@ tasks['arm'] = { ->
 // Run both task in parallel
 parallel(tasks)
 
-def multiArchFlow(String arch, configuration) {
+def multiArchFlow(String arch) {
 
     tech = "nodejs"
-
-    stage('initial') {
-        sh "echo ${configuration}"
-    }
 
     checkout(tech)
     
