@@ -18,7 +18,7 @@ node {
     multiArchFlow('arm')
 }
 
-def multiArchFlow(String arch) {
+def multiArchFlow(String tech) {
     checkout(tech)
     
     downloadTooling(tech)
