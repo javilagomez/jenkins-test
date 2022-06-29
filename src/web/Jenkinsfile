@@ -18,7 +18,7 @@ node {
 }
 
 // Run both task in parallel
-parallel(tasks)
+//parallel(tasks)
 
 def multiArchFlow(String arch) {
 
