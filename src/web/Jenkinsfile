@@ -26,8 +26,7 @@ def multiArchFlow(String arch) {
         sh "echo ${configuration}"
     }
 
-    println(configuration.contains("checkout"))
-    if (configuration.contains("checkout")) {
+    if (configuration.contains("build")) {
         stage('checkout') {
             checkout(tech)
             sh "echo ${STAGE_NAME}"
